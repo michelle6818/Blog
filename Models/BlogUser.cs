@@ -34,6 +34,12 @@ namespace Blog.Models
                 
         }
 
+        //Navigational properites
+        public virtual ICollection<Comment> Comments { get; set; } =
+            new HashSet<Comment>();
+
+
+
         //What about a more formal form....LastName, FirstName
         //[NotMapped]
         //public string FormalName 
@@ -46,9 +52,7 @@ namespace Blog.Models
 
         //}
 
-        //Navigational properites
-        public virtual ICollection<Comment> Comments { get; set; } =
-            new HashSet<Comment>();
+        
 
 
     }

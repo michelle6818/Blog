@@ -14,6 +14,8 @@ namespace Blog.Models
         public string BlogUserId { get; set; }
 
         //Properties
+        [Required]
+        [StringLength(200, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long.", MinimumLength = 10)]
         public string Body { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime Created { get; set; }
@@ -21,8 +23,10 @@ namespace Blog.Models
         public DateTime? Updated { get; set; }
 
         //Properties for the Moderator of Comments
-        public bool HasBeenModerated { get; set; }
-        public string ModerationReason { get; set; }
+        public DateTime? Moderated { get; set; }
+        //public bool HasBeenModerated { get; set; }
+        public string ModeratedReason { get; set; }
+        public string ModeratedBody { get; set; }
 
         //Navigational properties
         public virtual CategoryPost CategoryPost { get; set; }

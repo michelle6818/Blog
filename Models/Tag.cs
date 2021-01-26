@@ -9,14 +9,11 @@ namespace Blog.Models
     {
         //keys
         public int Id { get; set; }
-        public int CategoryPostId { get; set; }
-
+       
         //Descriptive properties
         public string Name { get; set; }
 
         //Navigational properties
-        public virtual CategoryPost CategoryPost { get; set; }
-
         public virtual ICollection<CategoryPost> CategoryPosts { get; set; } =
             new HashSet<CategoryPost>();
     }
