@@ -54,7 +54,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Created,Updated")] BlogCategory blogCategory)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] BlogCategory blogCategory)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Created,Updated")] BlogCategory blogCategory)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Created")] BlogCategory blogCategory)
         {
             if (id != blogCategory.Id)
             {
@@ -98,7 +98,7 @@ namespace Blog.Controllers
             {
                 try
                 {
-                    blogCategory.Created = DateTime.Now;
+                    blogCategory.Updated = DateTime.Now;
                     _context.Update(blogCategory);
                     await _context.SaveChangesAsync();
                 }

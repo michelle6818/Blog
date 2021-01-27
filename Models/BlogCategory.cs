@@ -18,9 +18,9 @@ namespace Blog.Models
         [Required]
         [StringLength(200, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long.", MinimumLength = 10)]
         public string Description { get; set; }
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime Created { get; set; }
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime? Updated { get; set; }
 
         //Navigation Section --info about the parent or children

@@ -27,9 +27,9 @@ namespace Blog.Models
         public bool IsProductionReady { get; set; }
 
         //Programmatically derived properties
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime Created { get; set; }
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime? Updated { get; set; }
         public string Slug { get; set; }
 

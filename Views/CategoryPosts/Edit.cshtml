@@ -13,7 +13,9 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Created" />
             <div class="form-group">
+                <input type="hidden" asp-for="BlogCategoryId" />
                 <label asp-for="BlogCategoryId" class="control-label"></label>
                 <select asp-for="BlogCategoryId" class="form-control" asp-items="ViewBag.BlogCategoryId"></select>
                 <span asp-validation-for="BlogCategoryId" class="text-danger"></span>
@@ -38,7 +40,7 @@
                     <input class="form-check-input" asp-for="IsProductionReady" /> @Html.DisplayNameFor(model => model.IsProductionReady)
                 </label>
             </div>
-            
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

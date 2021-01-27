@@ -59,10 +59,11 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CategoryPostId,BlogUserId,Body,Created,Updated,Moderated,ModeratedReason,ModeratedBody")] Comment comment)
+        public async Task<IActionResult> Create([Bind("Id,CategoryPostId,BlogUserId,Body,Moderated,ModeratedReason,ModeratedBody")] Comment comment)
         {
             if (ModelState.IsValid)
             {
+                comment.Created = DateTime.Now;
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -95,7 +96,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CategoryPostId,BlogUserId,Body,Created,Updated,Moderated,ModeratedReason,ModeratedBody")] Comment comment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CategoryPostId,BlogUserId,Body,Created,Moderated,ModeratedReason,ModeratedBody")] Comment comment)
         {
             if (id != comment.Id)
             {
@@ -106,6 +107,7 @@ namespace Blog.Controllers
             {
                 try
                 {
+                    comment.Updated = DateTime.Now;
                     _context.Update(comment);
                     await _context.SaveChangesAsync();
                 }

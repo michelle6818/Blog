@@ -58,6 +58,7 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 _context.Add(tag);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -97,6 +98,7 @@ namespace Blog.Controllers
             {
                 try
                 {
+                   
                     _context.Update(tag);
                     await _context.SaveChangesAsync();
                 }
