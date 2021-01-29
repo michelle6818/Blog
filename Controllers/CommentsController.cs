@@ -49,8 +49,8 @@ namespace Blog.Controllers
         // GET: Comments/Create
         public IActionResult Create()
         {
-            ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["CategoryPostId"] = new SelectList(_context.CategoryPost, "Id", "Id");
+            ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "UserName");
+            ViewData["CategoryPostId"] = new SelectList(_context.CategoryPost, "Id", "Title");
             return View();
         }
 
@@ -86,8 +86,8 @@ namespace Blog.Controllers
             {
                 return NotFound();
             }
-            ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", comment.BlogUserId);
-            ViewData["CategoryPostId"] = new SelectList(_context.CategoryPost, "Id", "Id", comment.CategoryPostId);
+            ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "UserName", comment.BlogUserId);
+            ViewData["CategoryPostId"] = new SelectList(_context.CategoryPost, "Id", "Title", comment.CategoryPostId);
             return View(comment);
         }
 

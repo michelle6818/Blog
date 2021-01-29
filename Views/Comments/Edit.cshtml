@@ -26,7 +26,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
-                <input asp-for="Body" class="form-control" />
+                @*<input asp-for="Body" class="form-control" />*@
+                <textarea asp-for="Body" class="form-control"></textarea>
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
 
@@ -42,7 +43,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="ModeratedBody" class="control-label"></label>
-                <input asp-for="ModeratedBody" class="form-control" />
+                @*<input asp-for="ModeratedBody" class="form-control" />*@
+                <textarea asp-for="ModeratedBody" class="form-control"></textarea>
                 <span asp-validation-for="ModeratedBody" class="text-danger"></span>
             </div>
             <div class="form-group">

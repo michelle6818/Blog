@@ -43,7 +43,8 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Body)
+                @*@Html.DisplayFor(modelItem => item.Body)*@
+                @Html.Raw(item.Body)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Created)
@@ -58,7 +59,8 @@
                 @Html.DisplayFor(modelItem => item.ModeratedReason)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ModeratedBody)
+                @*@Html.DisplayFor(modelItem => item.ModeratedBody)*@
+                @Html.Raw(item.ModeratedBody)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryPost.Id)

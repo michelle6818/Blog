@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -11,14 +12,17 @@ namespace Blog
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build()
+            var host = CreateHostBuilder(args).Build();
 
-                //Seed data
-                .Run();
+                //Seed data  I am going to write a class and a set of methods that seed info
+                //DataService - the name of a Class (aka - A Type)
+                //ManageDataAsync - a method inside the class that does a unit of work
+                //All ManageData is going to do is call a few other methods ("wrapper method")
 
-            
+                await DataService.ManageDataAsync(host);              
+                host.Run();         
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Blog.Data;
 using Blog.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Blog.Controllers
 {
@@ -32,7 +33,7 @@ namespace Blog.Controllers
                 return NotFound();
             }
 
-            //Now that I have an id lets use it to go grav all of the blog posts
+            //Now that I have an id lets use it to go grab all of the blog posts
             //that have a foreign key that equals the id (all the children)
             var posts = _context.CategoryPost.Where(cp => cp.BlogCategoryId == id).ToList();
             return View(posts);
@@ -58,6 +59,8 @@ namespace Blog.Controllers
         }
 
         // GET: BlogCategories/Create
+        //Nobody can just come in and create a new category, must occupy the role of Administrator
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -81,6 +84,7 @@ namespace Blog.Controllers
         }
 
         // GET: BlogCategories/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -133,6 +137,7 @@ namespace Blog.Controllers
         }
 
         // GET: BlogCategories/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

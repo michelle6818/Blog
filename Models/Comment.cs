@@ -17,7 +17,6 @@ namespace Blog.Models
 
         //Properties
         [Required]
-        [StringLength(300, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long.", MinimumLength = 10)]
         public string Body { get; set; }
         [DataType(DataType.Date)]
         public DateTime Created { get; set; }

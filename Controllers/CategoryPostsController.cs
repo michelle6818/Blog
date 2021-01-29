@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Blog.Data;
 using Blog.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Blog.Controllers
 {
@@ -61,6 +62,7 @@ namespace Blog.Controllers
         }
 
         // GET: CategoryPosts/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             //I have created a BlogCategoryId KEY in the ViewData dictionary
@@ -87,6 +89,7 @@ namespace Blog.Controllers
         }
 
         // GET: CategoryPosts/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -141,6 +144,7 @@ namespace Blog.Controllers
         }
 
         // GET: CategoryPosts/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
