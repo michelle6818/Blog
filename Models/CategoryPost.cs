@@ -11,17 +11,15 @@ namespace Blog.Models
 
         //keys
         public int Id { get; set; }
+        [Display(Name = "Category Name")]
         public int BlogCategoryId { get; set; }
 
         //Main properties
         [Required]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long.", MinimumLength = 2)]
         public string Title { get; set; }
         [Required]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long.", MinimumLength = 2)]
         public string Abstract { get; set; }
         [Required]
-        [StringLength(200, ErrorMessage = "The {0} must be at least {2} and no more than {1} characters long.", MinimumLength = 10)]
         public string Content { get; set; }
         [Display(Name = "Production Ready")]
         public bool IsProductionReady { get; set; }
@@ -34,6 +32,7 @@ namespace Blog.Models
         public string Slug { get; set; }
 
         //Navigational Properties
+        [Display(Name = "Category Name")]
         public virtual BlogCategory BlogCategory { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; } =

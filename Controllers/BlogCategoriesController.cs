@@ -25,6 +25,20 @@ namespace Blog.Controllers
             return View(await _context.BlogCategory.ToListAsync());
         }
 
+        public IActionResult CategoryPosts(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            //Now that I have an id lets use it to go grav all of the blog posts
+            //that have a foreign key that equals the id (all the children)
+            var posts = _context.CategoryPost.Where(cp => cp.BlogCategoryId == id).ToList();
+            return View(posts);
+        }
+
+
         // GET: BlogCategories/Details/5
         public async Task<IActionResult> Details(int? id)
         {

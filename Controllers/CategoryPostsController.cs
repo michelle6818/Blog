@@ -26,6 +26,21 @@ namespace Blog.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        public IActionResult CategoryIndex(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            //Write a LINQ statement that uses the Id to get all of the Blog osts with the Category Id FK = id
+            var posts = _context.CategoryPost.Where(cp => cp.BlogCategoryId == id).ToList();
+
+            //Once I have my Blog posts I want to display them in the Index view
+            return View("Index", posts);
+        }
+
         // GET: CategoryPosts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -48,7 +63,8 @@ namespace Blog.Controllers
         // GET: CategoryPosts/Create
         public IActionResult Create()
         {
-            ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Id");
+            //I have created a BlogCategoryId KEY in the ViewData dictionary
+            ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Name");
             return View();
         }
 
@@ -83,7 +99,7 @@ namespace Blog.Controllers
             {
                 return NotFound();
             }
-            ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Id", categoryPost.BlogCategoryId);
+            ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Name", categoryPost.BlogCategoryId);
             return View(categoryPost);
         }
 

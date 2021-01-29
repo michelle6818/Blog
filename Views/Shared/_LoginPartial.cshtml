@@ -4,7 +4,13 @@
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
+
 {
+
+    //This line of code uses the built in UserManager to find a specific record in the ASPNetUser table
+    //by finding the username
+    //var person = await UserManager.FindByNameAsync(User.Identity.Name);
+
     <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
     </li>

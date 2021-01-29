@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Blog.Models.CategoryPost>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "CategoryPosts";
 }
 
-<h1>Index</h1>
+<h1>CategoryPosts</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -66,7 +66,7 @@
                 @Html.DisplayFor(modelItem => item.Slug)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BlogCategory.Name)
+                @Html.DisplayFor(modelItem => item.BlogCategory.Description)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
