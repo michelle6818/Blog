@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Blog.Services
+namespace Blog.Utilites
 {
 
     //In order to use an instnce of this class (as it's defined right now..)
@@ -26,7 +26,7 @@ namespace Blog.Services
     //myOtherString = "some other string";
 
 
-    public static class DataService
+    public static class DataUtility
     {                          //Wrapper Method (ManageDataAsync)
         public static async Task ManageDataAsync(IHost host)
         {

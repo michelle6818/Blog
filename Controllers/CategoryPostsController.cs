@@ -8,16 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using Blog.Data;
 using Blog.Models;
 using Microsoft.AspNetCore.Authorization;
+using Blog.Services;
 
 namespace Blog.Controllers
 {
     public class CategoryPostsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private ISlugService _slugService;
 
-        public CategoryPostsController(ApplicationDbContext context)
+        public CategoryPostsController(ApplicationDbContext context, ISlugService slugService)
         {
             _context = context;
+            _slugService = slugService;
         }
 
         // GET: CategoryPosts
@@ -43,16 +46,33 @@ namespace Blog.Controllers
         }
 
         // GET: CategoryPosts/Details/5
-        public async Task<IActionResult> Details(int? id)
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var categoryPost = await _context.CategoryPost
+        //        .Include(c => c.BlogCategory)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (categoryPost == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(categoryPost);
+        //}   
+        public async Task<IActionResult> Details(string slug)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(slug))
             {
                 return NotFound();
             }
 
             var categoryPost = await _context.CategoryPost
                 .Include(c => c.BlogCategory)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Slug == slug);
             if (categoryPost == null)
             {
                 return NotFound();
@@ -79,12 +99,25 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var slug = _slugService.URLFriendly(categoryPost.Title);
+                if (_slugService.IsUnique(_context, slug))
+                {
+                    categoryPost.Slug = slug;
+                }
+                else
+                {
+                    ModelState.AddModelError("Title", "This Title cannot be used as it results in a duplicate Slug!");
+                    ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Name");
+                    return View(categoryPost);
+                }
+
                 categoryPost.Created = DateTime.Now;
                 _context.Add(categoryPost);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Id", categoryPost.BlogCategoryId);
+            ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Name", categoryPost.BlogCategoryId);
             return View(categoryPost);
         }
 
@@ -116,12 +149,25 @@ namespace Blog.Controllers
             if (id != categoryPost.Id)
             {
                 return NotFound();
-            }
-
+            }          
             if (ModelState.IsValid)
             {
                 try
                 {
+                 var slug = _slugService.URLFriendly(categoryPost.Title);
+                  if (slug != categoryPost.Slug)
+                    {
+                        if (_slugService.IsUnique(_context, slug))
+                        {
+                            categoryPost.Slug = slug;
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("Title", "This Title cannot be used as it results in a duplicate Slug!");
+                            ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Name");
+                            return View(categoryPost);
+                        }
+                    }
                     categoryPost.Updated = DateTime.Now;
                     _context.Update(categoryPost);
                     await _context.SaveChangesAsync();
@@ -139,7 +185,7 @@ namespace Blog.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Id", categoryPost.BlogCategoryId);
+            ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Name", categoryPost.BlogCategoryId);
             return View(categoryPost);
         }
 

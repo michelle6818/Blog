@@ -7,3 +7,18 @@
     <h3><a class="nav-link text-dark" asp-area="" asp-controller="BlogCategories" asp-action="Index">Click to read our blogs</a></h3>
 </div>
 
+<hr />
+@*How will I ask if the User is logged in at all*@
+@if (User.Identity.IsAuthenticated)
+{
+    <h1 class="text-center">Enter your comment below</h1>
+    <br />
+    <form>
+        <textarea></textarea>
+          <button type="submit" class="btn btn-dark">Share Comment</button>        
+       </form>
+}
+else
+{
+    <h1 class="text-center">LOGIN TO ENTER A COMMENT</h1>
+}

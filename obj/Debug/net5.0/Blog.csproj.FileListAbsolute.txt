@@ -518,3 +518,6 @@ C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Tags\Details.cshtm
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Tags\Edit.cshtml.g.cs
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Tags\Index.cshtml.g.cs
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\BlogCategories\CategoryPosts.cshtml.g.cs
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\MailKit.dll
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\MimeKit.dll
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\BouncyCastle.Crypto.dll
