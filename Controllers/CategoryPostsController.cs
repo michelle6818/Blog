@@ -72,6 +72,8 @@ namespace Blog.Controllers
 
             var categoryPost = await _context.CategoryPost
                 .Include(c => c.BlogCategory)
+                .Include(c => c.Comments)
+                .ThenInclude(p => p.BlogUser)
                 .FirstOrDefaultAsync(m => m.Slug == slug);
             if (categoryPost == null)
             {

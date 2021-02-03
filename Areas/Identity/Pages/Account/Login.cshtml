@@ -69,13 +69,22 @@
                             <p>
                                 @foreach (var provider in Model.ExternalLogins)
                                 {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    switch (provider.Name)
+                                    //(provider.DisplayName.ToUpper())
+                                    {
+                                        case "GitHub":
+                                            <button type="submit" class="btn btn-dark" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Login w/ @provider.DisplayName</button>
+                                            break;
+                                        case "Facebook":
+                                            <button type="submit" class="btn btn-success" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Login with @provider.DisplayName</button>
+                                            break;
+                                    }
                                 }
                             </p>
                         </div>
                     </form>
                 }
-            }
+               }
         </section>
     </div>
 </div>

@@ -10,13 +10,13 @@
     <h4>CategoryPost</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Abstract)
         </dt>
         <dd class="col-sm-10">
@@ -30,34 +30,34 @@
             @*@Html.DisplayFor(model => model.Content)*@
             @Html.Raw(Model.Content)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IsProductionReady)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IsProductionReady)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Created)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Created)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Updated)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Updated)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Slug)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Slug)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BlogCategory)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BlogCategory.Id)
         </dd>
     </dl>
@@ -65,4 +65,69 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
+
+
+<!--Comment Section-->
+@*Step 1: Give the user an opportunity to either:
+    Login to add a comment
+    Add a comment*@
+<hr />
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-controller="Comments" asp-action="Create">
+        <input type="hidden" asp-for="Slug" />
+        <div class="container">
+            <div class="row">
+                <div class="col-md">
+                    @Html.Hidden("CategoryPostId", Model.Id)
+                    
+                    <div class="form-group">
+                        <label class="control-label">Comment</label>
+                        @*<input asp-for="Body" class="form-control" />*@
+                        <textarea name="Body" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-dark">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+else
+{
+    <h1>Please log in to add a comment</h1>
+}
+@*step 2: list all the comments*@
+@foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
+{
+    <div class="row">
+        <div class="col">
+            @comment.BlogUser.FullName
+        </div>
+        <div class="col">
+            @comment.Created.ToString("MMM dd, yyyy")
+        </div>
+        <div class="col">
+            @{
+                var currentTime = DateTime.Now;
+                var timeSpan = currentTime - comment.Created;
+                var elapsedMinutes = timeSpan.Minutes;
+                var elapsedHours = timeSpan.Hours;
+            }
+            @elapsedHours hours, @elapsedMinutes minutes ago
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @Html.Raw(comment.Body)
+        </div>
+    </div>
+}
+<br />
+<div>
+    <a asp-controller="Comments" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-controller="Comments" asp-action="Index">Back to Comments</a>
 </div>

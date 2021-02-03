@@ -48,6 +48,22 @@ namespace Blog
             services.AddRazorPages();
             //This is how I register a custom class as a service
             services.AddTransient<ISlugService, BasicSlugService>();
+            //github
+            services.AddAuthentication()
+                .AddGitHub(options =>
+                {
+                    options.ClientId = "60feb9f7d449db43a31f";
+                    options.ClientSecret = "6167f7385e6c2c5f727ea5a893a44efa3f89a294";
+                    options.AccessDeniedPath = "/AccessDeniedPathInfo";
+                });
+            //facebook
+            services.AddAuthentication()
+                .AddFacebook(options =>
+                {
+                    options.AppId = "204427018038372";
+                    options.AppSecret = "e0c7e6df28ad2570cf043915857e9f49";
+                    options.AccessDeniedPath = "/AccessDeniedPathInfo";
+                });
 
             //Services needed to send emails
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));

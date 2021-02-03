@@ -7,6 +7,7 @@ namespace Blog.Models
 {
     public class MailSettings
     {
+        public static MailSettings Value { get; internal set; }
         public string Mail { get; set; }
         public string DisplayName { get; set; }
         public string Password { get; set; }

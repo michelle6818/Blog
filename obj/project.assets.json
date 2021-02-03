@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "AspNet.Security.OAuth.GitHub/5.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/AspNet.Security.OAuth.GitHub.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/AspNet.Security.OAuth.GitHub.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -22,6 +34,42 @@
         "runtime": {
           "lib/netstandard2.0/MailKit.dll": {}
         }
+      },
+      "Microsoft.AspNetCore.Authentication.Facebook/5.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Facebook.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Facebook.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Microsoft.AspNetCore.Authentication.Google/5.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Google.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Google.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Microsoft.AspNetCore.Authentication.Twitter/5.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Twitter.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Twitter.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "Microsoft.AspNetCore.Cryptography.Internal/5.0.2": {
         "type": "package",
@@ -1104,7 +1152,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "Npgsql/5.0.2": {
+      "Npgsql/5.0.3": {
         "type": "package",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "4.6.0"
@@ -2428,6 +2476,20 @@
     }
   },
   "libraries": {
+    "AspNet.Security.OAuth.GitHub/5.0.1": {
+      "sha512": "vAcSfuxanrIr+O2ZA8MgCmRvGznaXa42ptIg4uvrnaln31SAczhzKi5No0zLnEKkMRKYr/vBMLoHF9+MAoGpyQ==",
+      "type": "package",
+      "path": "aspnet.security.oauth.github/5.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "aspnet.security.oauth.github.5.0.1.nupkg.sha512",
+        "aspnet.security.oauth.github.nuspec",
+        "lib/net5.0/AspNet.Security.OAuth.GitHub.dll",
+        "lib/net5.0/AspNet.Security.OAuth.GitHub.xml"
+      ]
+    },
     "Humanizer.Core/2.8.26": {
       "sha512": "OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "type": "package",
@@ -2469,6 +2531,51 @@
         "lib/netstandard2.0/MailKit.xml",
         "mailkit.2.10.1.nupkg.sha512",
         "mailkit.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.Facebook/5.0.2": {
+      "sha512": "3W5hmFM2DCcKtaTViSk4lxRjOv0UHuqnwBpVUvBHmzg/2YHhA25P4JvXDpkg8xEgCiLfkAMyQHeRP/LbgjTIWA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.facebook/5.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net5.0/Microsoft.AspNetCore.Authentication.Facebook.dll",
+        "lib/net5.0/Microsoft.AspNetCore.Authentication.Facebook.xml",
+        "microsoft.aspnetcore.authentication.facebook.5.0.2.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.facebook.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.Google/5.0.2": {
+      "sha512": "XzfvUNcnybehwplulywBsiaKxbUGAbJ52S693pg4qAZcwVptCblQPU4baSYF4/e2tYUGEb95giQbiuj4abFfVw==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.google/5.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net5.0/Microsoft.AspNetCore.Authentication.Google.dll",
+        "lib/net5.0/Microsoft.AspNetCore.Authentication.Google.xml",
+        "microsoft.aspnetcore.authentication.google.5.0.2.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.google.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.Twitter/5.0.2": {
+      "sha512": "V+ePR5/b/s627zYiVbyslTcDVWStVkmV1wE3kVMkOtxiq3/r9sqMAf4/dJwXX7B6KNUJWG5o/w+YTI2kKnsxHg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.twitter/5.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net5.0/Microsoft.AspNetCore.Authentication.Twitter.dll",
+        "lib/net5.0/Microsoft.AspNetCore.Authentication.Twitter.xml",
+        "microsoft.aspnetcore.authentication.twitter.5.0.2.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.twitter.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Cryptography.Internal/5.0.2": {
@@ -4341,10 +4448,10 @@
         "newtonsoft.json.nuspec"
       ]
     },
-    "Npgsql/5.0.2": {
-      "sha512": "bqsG+0t6+c7nfpunu08HkjeRZCI2g8EbXNtWUHsnFlDzjx0zsLkvzfByiHuYo9a74CMKR9RmxRu7HiPGCE/EvQ==",
+    "Npgsql/5.0.3": {
+      "sha512": "IDx2tijhyXGz7tVXQH0iGnCnW0ReSUy3UC99ytSklJKscob5WV8eLZWuT/jqYBq0l07RmZOSrdjUEDEetsgDIA==",
       "type": "package",
-      "path": "npgsql/5.0.2",
+      "path": "npgsql/5.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4356,7 +4463,7 @@
         "lib/netstandard2.0/Npgsql.xml",
         "lib/netstandard2.1/Npgsql.dll",
         "lib/netstandard2.1/Npgsql.xml",
-        "npgsql.5.0.2.nupkg.sha512",
+        "npgsql.5.0.3.nupkg.sha512",
         "npgsql.nuspec",
         "postgresql.png"
       ]
@@ -8168,7 +8275,11 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "AspNet.Security.OAuth.GitHub >= 5.0.1",
       "MailKit >= 2.10.1",
+      "Microsoft.AspNetCore.Authentication.Facebook >= 5.0.2",
+      "Microsoft.AspNetCore.Authentication.Google >= 5.0.2",
+      "Microsoft.AspNetCore.Authentication.Twitter >= 5.0.2",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 5.0.2",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.2",
       "Microsoft.AspNetCore.Identity.UI >= 5.0.2",
@@ -8177,7 +8288,7 @@
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.2",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.1",
-      "Npgsql >= 5.0.2",
+      "Npgsql >= 5.0.3",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 5.0.2"
     ]
   },
@@ -8220,9 +8331,25 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "AspNet.Security.OAuth.GitHub": {
+            "target": "Package",
+            "version": "[5.0.1, )"
+          },
           "MailKit": {
             "target": "Package",
             "version": "[2.10.1, )"
+          },
+          "Microsoft.AspNetCore.Authentication.Facebook": {
+            "target": "Package",
+            "version": "[5.0.2, )"
+          },
+          "Microsoft.AspNetCore.Authentication.Google": {
+            "target": "Package",
+            "version": "[5.0.2, )"
+          },
+          "Microsoft.AspNetCore.Authentication.Twitter": {
+            "target": "Package",
+            "version": "[5.0.2, )"
           },
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
             "target": "Package",
@@ -8260,7 +8387,7 @@
           },
           "Npgsql": {
             "target": "Package",
-            "version": "[5.0.2, )"
+            "version": "[5.0.3, )"
           },
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",

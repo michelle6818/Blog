@@ -508,8 +508,6 @@ C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\CategoryPosts\Deta
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\CategoryPosts\Edit.cshtml.g.cs
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\CategoryPosts\Index.cshtml.g.cs
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Comments\Create.cshtml.g.cs
-C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Comments\Delete.cshtml.g.cs
-C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Comments\Details.cshtml.g.cs
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Comments\Edit.cshtml.g.cs
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Comments\Index.cshtml.g.cs
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Tags\Create.cshtml.g.cs
@@ -521,3 +519,8 @@ C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\BlogCategories\Cat
 C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\MailKit.dll
 C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\MimeKit.dll
 C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Home\Contact.cshtml.g.cs
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\AspNet.Security.OAuth.GitHub.dll
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Facebook.dll
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Twitter.dll
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Google.dll
