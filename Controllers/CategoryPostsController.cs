@@ -9,18 +9,25 @@ using Blog.Data;
 using Blog.Models;
 using Microsoft.AspNetCore.Authorization;
 using Blog.Services;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Blog.Controllers
 {
     public class CategoryPostsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private ISlugService _slugService;
+        private readonly IImageService _imageService;
+        private readonly ISlugService _slugService;
 
-        public CategoryPostsController(ApplicationDbContext context, ISlugService slugService)
+        public CategoryPostsController(
+            ApplicationDbContext context,
+            ISlugService slugService,
+            IImageService imageService)
         {
             _context = context;
             _slugService = slugService;
+            _imageService = imageService;
         }
 
         // GET: CategoryPosts
@@ -97,7 +104,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BlogCategoryId,Title,Abstract,Content,IsProductionReady,Slug")] CategoryPost categoryPost)
+        public async Task<IActionResult> Create([Bind("Id,BlogCategoryId,Title,Abstract,Content,IsProductionReady,Slug")] CategoryPost categoryPost, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
@@ -113,8 +120,18 @@ namespace Blog.Controllers
                     ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Name");
                     return View(categoryPost);
                 }
-
                 categoryPost.Created = DateTime.Now;
+
+                
+                    categoryPost.ContentType = _imageService.RecordContentType(formFile);
+                    categoryPost.ImageData = await _imageService.EncodeFileAsync(formFile);
+                    //This is the code for turning an image into a byte array
+                    using var ms = new MemoryStream();
+                    await formFile.CopyToAsync(ms);
+                    categoryPost.ImageData = ms.ToArray();
+                
+
+
                 _context.Add(categoryPost);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

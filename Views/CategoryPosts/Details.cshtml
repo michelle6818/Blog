@@ -1,4 +1,8 @@
-﻿@model Blog.Models.CategoryPost
+﻿@using Blog.Services
+@using Blog.Models 
+
+@inject IImageService imageService  
+@model CategoryPost
 
 @{
     ViewData["Title"] = "Details";
@@ -9,6 +13,8 @@
 <div>
     <h4>CategoryPost</h4>
     <hr />
+
+    <img src="@imageService.DecodeFile(Model.ImageData, Model.ContentType)" class="img-fluid"/>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)

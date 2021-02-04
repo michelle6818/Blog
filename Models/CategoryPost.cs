@@ -30,11 +30,14 @@ namespace Blog.Models
         [DataType(DataType.Date)]
         public DateTime? Updated { get; set; }
         public string Slug { get; set; }
+        //I need to add properties for storing images
+        [Display(Name = "Choose Image")]
+        public byte[] ImageData { get; set; }
+        public string ContentType { get; set; }
 
         //Navigational Properties
         [Display(Name = "Category Name")]
         public virtual BlogCategory BlogCategory { get; set; }
-
         public virtual ICollection<Comment> Comments { get; set; } =
         new HashSet<Comment>();
         public virtual ICollection<Tag> Tags { get; set; } =

@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Blog.Models.CategoryPost>
+﻿@using Blog.Services 
+
+@inject IImageService imageService 
+@model IEnumerable<Blog.Models.CategoryPost>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,6 +15,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
@@ -21,7 +25,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Content)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.IsProductionReady)
             </th>
             <th>
@@ -35,13 +39,16 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BlogCategory)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                <img src="@imageService.DecodeFile(item.ImageData, item.ContentType)" class="img-fluid"/>
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
@@ -53,7 +60,7 @@
                 @*@Html.DisplayFor(modelItem => item.Content)*@
                 @Html.Raw(item.Content)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.IsProductionReady)
             </td>
             <td>
@@ -67,7 +74,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BlogCategory.Name)
-            </td>
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-slug="@item.Slug">Details</a> |
