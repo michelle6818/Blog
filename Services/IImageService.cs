@@ -9,10 +9,10 @@ namespace Blog.Services
     public interface IImageService
     {
         //I need to declare a method like EncodeFileAsync
-        Task<byte[]>EncodeFileAsync(IFormFile formfile);
+        Task<byte[]>EncodeFileAsync(IFormFile formFile);
 
         string DecodeFile(byte[] imageData, string contentType);
 
-        string RecordContentType(IFormFile formfile);
+        string RecordContentType(IFormFile formFile);
     }
 }

@@ -115,7 +115,7 @@ else
         <div class="col">
             @comment.Created.ToString("MMM dd, yyyy")
         </div>
-        <div class="col">
+        @*<div class="col">
             @{
                 var currentTime = DateTime.Now;
                 var timeSpan = currentTime - comment.Created;
@@ -124,7 +124,7 @@ else
             }
             @elapsedHours hours, @elapsedMinutes minutes ago
 
-        </div>
+        </div>*@
     </div>
     <div class="row">
         <div class="col">

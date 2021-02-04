@@ -8,16 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using Blog.Data;
 using Blog.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Blog.Services;
 
 namespace Blog.Controllers
 {
     public class BlogCategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IImageService _imageService;
+        
 
-        public BlogCategoriesController(ApplicationDbContext context)
+        public BlogCategoriesController(
+            ApplicationDbContext context,
+            IImageService imageService)
         {
             _context = context;
+            _imageService = imageService;
+
         }
 
         // GET: BlogCategories
@@ -71,10 +79,13 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] BlogCategory blogCategory)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,ImageData,ContentType")] BlogCategory blogCategory, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
+                blogCategory.ContentType = _imageService.RecordContentType(formFile);
+                blogCategory.ImageData = await _imageService.EncodeFileAsync(formFile);
+
                 blogCategory.Created = DateTime.Now;
                 _context.Add(blogCategory);
                 await _context.SaveChangesAsync();
@@ -105,7 +116,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Created")] BlogCategory blogCategory)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Created,ImageData,ContentType")] BlogCategory blogCategory, IFormFile formFile)
         {
             if (id != blogCategory.Id)
             {
@@ -114,6 +125,12 @@ namespace Blog.Controllers
 
             if (ModelState.IsValid)
             {
+                if (formFile != null)
+                {
+                    blogCategory.ContentType = _imageService.RecordContentType(formFile);
+                    blogCategory.ImageData = await _imageService.EncodeFileAsync(formFile);
+
+                }
                 try
                 {
                     blogCategory.Updated = DateTime.Now;

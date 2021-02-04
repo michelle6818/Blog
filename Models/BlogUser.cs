@@ -21,6 +21,11 @@ namespace Blog.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        //Blog User image
+        [Display(Name = "Choose Your Image")]
+        public byte[] ImageData { get; set; }
+        public string ContentType { get; set; }
+
 
         //What if I wanted to ask this class for the user's Full Name?
         //use 

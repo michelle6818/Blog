@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Blog.Models.BlogCategory>
+﻿@using Blog.Services
+
+@inject IImageService imageService
+@model IEnumerable<Blog.Models.BlogCategory>
 
 @{
     ViewData["Title"] = "Index";
@@ -28,8 +31,12 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
+            <td>
+                <img src="@imageService.DecodeFile(item.ImageData, item.ContentType)" class="img-fluid" />
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -50,6 +57,6 @@
                 <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@item.Id">Posts</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

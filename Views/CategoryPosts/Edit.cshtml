@@ -1,4 +1,8 @@
-﻿@model Blog.Models.CategoryPost
+﻿@using Blog.Services
+@using Blog.Models
+
+@model CategoryPost
+@inject IImageService imageService
 
 @{
     ViewData["Title"] = "Edit";
@@ -8,18 +12,25 @@
 
 <h4>CategoryPost</h4>
 <hr />
+<img src="@imageService.DecodeFile(Model.ImageData, Model.ContentType)" class="img-fluid" />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="Created" />
             <input type="hidden" asp-for="Slug" />
+            <input type="hidden" asp-for="ImageData" />
+            <input type="hidden" asp-for="ContentType" />
             <div class="form-group">
                 @*<input type="hidden" asp-for="BlogCategoryId" />*@
                 <label asp-for="BlogCategoryId" class="control-label"></label>
                 <select asp-for="BlogCategoryId" class="form-control" asp-items="ViewBag.BlogCategoryId"></select>
                 <span asp-validation-for="BlogCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageData" class="control-label"></label>
+                <input name="formFile" type="file" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>

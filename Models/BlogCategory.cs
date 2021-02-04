@@ -21,6 +21,10 @@ namespace Blog.Models
         [DataType(DataType.Date)]
         public DateTime? Updated { get; set; }
 
+        [Display(Name = "Choose An Image")]
+        public byte[] ImageData { get; set; }
+        public string ContentType { get; set; }
+
         //Navigation Section --info about the parent or children
         //As a Blog Category I am likely to have zero or more Category Post children
         public virtual ICollection<CategoryPost> CategoryPosts { get; set; } =

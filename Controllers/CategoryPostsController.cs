@@ -104,7 +104,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BlogCategoryId,Title,Abstract,Content,IsProductionReady,Slug")] CategoryPost categoryPost, IFormFile formFile)
+        public async Task<IActionResult> Create([Bind("Id,BlogCategoryId,Title,Abstract,Content,IsProductionReady,Slug,ImageData,ContentType")] CategoryPost categoryPost, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
@@ -125,11 +125,11 @@ namespace Blog.Controllers
                 
                     categoryPost.ContentType = _imageService.RecordContentType(formFile);
                     categoryPost.ImageData = await _imageService.EncodeFileAsync(formFile);
-                    //This is the code for turning an image into a byte array
-                    using var ms = new MemoryStream();
-                    await formFile.CopyToAsync(ms);
-                    categoryPost.ImageData = ms.ToArray();
-                
+                //This is the code for turning an image into a byte array
+                using var ms = new MemoryStream();
+                await formFile.CopyToAsync(ms);
+                categoryPost.ImageData = ms.ToArray();
+
 
 
                 _context.Add(categoryPost);
@@ -163,14 +163,22 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogCategoryId,Title,Abstract,Content,IsProductionReady,Created,Slug")] CategoryPost categoryPost)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogCategoryId,Title,Abstract,Content,IsProductionReady,Created,Slug,ImageData,ContentType")] CategoryPost categoryPost, IFormFile formFile)
         {
+
             if (id != categoryPost.Id)
             {
                 return NotFound();
-            }          
+            }
+           
             if (ModelState.IsValid)
             {
+                if (formFile != null)
+                {
+                    categoryPost.ContentType = _imageService.RecordContentType(formFile);
+                    categoryPost.ImageData = await _imageService.EncodeFileAsync(formFile);
+
+                }
                 try
                 {
                  var slug = _slugService.URLFriendly(categoryPost.Title);
@@ -187,6 +195,7 @@ namespace Blog.Controllers
                             return View(categoryPost);
                         }
                     }
+                    
                     categoryPost.Updated = DateTime.Now;
                     _context.Update(categoryPost);
                     await _context.SaveChangesAsync();
