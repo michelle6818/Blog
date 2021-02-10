@@ -67,4 +67,10 @@
     <PackageReference Include="PagedList.Core.Mvc" Version="3.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\Images\Image10.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
