@@ -1,86 +1,75 @@
-﻿@using Blog.Services 
+﻿@using Blog.Services;
+@using PagedList;
+@using PagedList.Core.Mvc; 
 
-@inject IImageService imageService 
+
+@inject IImageService imageService
 @model IEnumerable<Blog.Models.CategoryPost>
+@*@model IPagedList<CategoryPost>*@
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Abstract)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.IsProductionReady)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Updated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Slug)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BlogCategory)
-            </th>*@
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <img src="@imageService.DecodeFile(item.ImageData, item.ContentType)" class="img-fluid"/>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.Abstract)*@
-                @Html.Raw(item.Abstract)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.Content)*@
-                @Html.Raw(item.Content)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.IsProductionReady)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Updated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Slug)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BlogCategory.Name)
-            </td>*@
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-slug="@item.Slug">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<section class="blog-list px-3 py-5 p-md-5">
+    <div class="container">
+        @*@if(Model.Count() == 0)
+        {
+            <h2>Your search for @ViewBag.SearchString yielded no results.</h2>
+        }*@
+       
+        @*@{ var index = 1;}*@
+        @foreach (var categoryPost in Model.OrderByDescending(cp => cp.Created))
+        {
+            <div class="item mb-5">
+                <div class="media">
+                    <img src="@imageService.DecodeFile(categoryPost.ImageData, categoryPost.ContentType)" class="image-fluid">
+                    <div class="media-body">
+                        <h3 class="title mb-1">                           
+                                @categoryPost.Title                           
+                        </h3>
+                        <span class="date meta mb-1">
+                            Published @categoryPost.Created.ToString("MMM dd, yyyy")
+                        </span>
+                        @*<span class="time">5 min read</span><span class="comment"><a href="#">8 comments</a></span></div>*@
+                        <div class="col"></div>
+                        <div class="col"></div>
+                        @Html.Raw(categoryPost.Abstract)
+                    </div>
+                        <div class="intro">
+                            @Html.Raw(categoryPost.Abstract)
+                        </div>
+                        <a asp-action="Details" asp-route-id="@categoryPost.Id">Read more &rarr;</a>
+                    </div>
+                </div>
+         
+            <hr>
+        }
+
+    </div>
+</section>
+
+<div class="row">
+    <div class="col">
+        @ViewBag.PageXofY
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <form asp-action="Index" method="get">
+            <input type="hidden" name="searchString" value="@ViewBag.SearchString"/> 
+            @for (var loop = 1; loop <= ViewBag.TotalPages; loop++)
+            {
+                var myClass = "btn-success";
+                if(loop == (int)ViewBag.PageNumber)
+                {
+                    myClass = "btn-outline-success";
+                }
+                <button class="btn btn-sm @myClass" type="submit" name="pageNumber" value="@loop">@loop</button>
+            }
+        </form>
+    </div>
+</div>
+

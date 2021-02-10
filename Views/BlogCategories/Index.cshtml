@@ -7,56 +7,82 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<section class="blog-list px-3 py-5 p-md-5">
+    <div class="container">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Updated)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+        @foreach (var category in Model.OrderByDescending(b => b.Created))
         {
-        <tr>
-            <td>
-                <img src="@imageService.DecodeFile(item.ImageData, item.ContentType)" class="img-fluid" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.Description)*@
-                @Html.Raw(item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Updated)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@item.Id">Posts</a>
-            </td>
-        </tr>
+            <div class="item mb-5">
+                <!--<div class="media">
+                    <img src="@imageService.DecodeFile(category.ImageData, category.ContentType)" class="image-fluid">
+                    <div class="media-body">
+                        <h3 class="title mb-1">
+                            @category.Name
+                        </h3>
+                        <span class="date meta mb-1">
+                            Published @category.Created.ToString("MMM dd, yyyy")
+                        </span>-->
+                        @*<span class="date">Updated @category.Updated.ToString("MMM dd, yyyy")</span>*@
+                        @*<span class="time">5 min read</span><span class="comment"><a href="#">8 comments</a></span></div>*@
+                        <!--<div class="intro">
+                            @category.Description
+                        </div>
+                        <br />
+                        <div>
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <a asp-action="Details" asp-route-id="@category.Id">Administrative Controls</a>
+                            }
+                        </div>
+                        <br />
+                        <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@category.Id">Read more &rarr;</a>
+                   
+                    
+                </div>
+                </div>-->
+                <hr>
+                <div class="item mb-5">
+                    <div class="media">
+                        <div class="media-body">
+                            <h3 class="title mb-1">
+                                @category.Name
+                            </h3>
+                            <span class="date meta mb-1">
+                                Published @category.Created.ToString("MMM dd, yyyy")
+                            </span>
+                            @*<span class="date">Updated @category.Updated.ToString("MMM dd, yyyy")</span>*@
+                            @*<span class="time">5 min read</span><span class="comment"><a href="#">8 comments</a></span></div>*@
+                            <div class="intro">
+                                @category.Description
+                            </div>
+                            <br />
+                            <div>
+                                @if (User.IsInRole("Administrator"))
+                                {
+                                    <a asp-action="Details" asp-route-id="@category.Id">Administrative Controls</a>
+                                }
+                            </div>
+                            <br />
+                            <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@category.Id">Read more &rarr;</a>
+                       </div>
+                        <img src="@imageService.DecodeFile(category.ImageData, category.ContentType)" class="image-fluid">
+                    </div>
+                </div>
+                <hr>
+                
+
+            </div>
+
         }
-    </tbody>
-</table>
+    </div>
+</section>
+
+
+
+@*<td>
+        <a asp-action="Edit" asp-route-id="@category.Id">Edit</a> |
+        <a asp-action="Details" asp-route-id="@category.Id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@category.Id">Delete</a> |
+        <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@category.Id">Posts</a>
+    </td>*@
+

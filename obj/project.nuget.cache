@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "f8zbunLUVj5w0LLWR/WhM/HjM+XJv7rMlupKxnV3BMyAfsTQlAX70EE9rVBDaNsOXS8LoN5kcY1dwy/GxZsdzA==",
+  "dgSpecHash": "v53OSqwILn24yQ0xUlRgsv8+qaIWU/2i/sy6QmWYE4eI5SqjCLevOokduq5QwotTMicVSOpwhdvcK8ON8SPDIw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Owner\\source\\repos\\Blog\\Blog.csproj",
   "expectedPackageFiles": [
@@ -78,6 +78,8 @@
     "C:\\Users\\Owner\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\npgsql\\5.0.3\\npgsql.5.0.3.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\5.0.2\\npgsql.entityframeworkcore.postgresql.5.0.2.nupkg.sha512",
+    "C:\\Users\\Owner\\.nuget\\packages\\pagedlist.core\\1.17.4\\pagedlist.core.1.17.4.nupkg.sha512",
+    "C:\\Users\\Owner\\.nuget\\packages\\pagedlist.core.mvc\\3.0.0\\pagedlist.core.mvc.3.0.0.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\portable.bouncycastle\\1.8.8\\portable.bouncycastle.1.8.8.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.4\\sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",

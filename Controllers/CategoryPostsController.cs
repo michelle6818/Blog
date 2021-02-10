@@ -31,13 +31,91 @@ namespace Blog.Controllers
         }
 
         // GET: CategoryPosts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber, string searchString)
         {
-            var applicationDbContext = _context.CategoryPost.Include(c => c.BlogCategory);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["SearchString"] = searchString;
+
+            //Want to look at the incoming pageNumber variable and either use it or force it to be 1
+            //use Null coelesing operator
+            //loop++  same as loop +=1
+            pageNumber = pageNumber == null || pageNumber <= 0 ? 1 : pageNumber;
+            //pageNumber ??= 1;
+            ViewData["PageNumber"] = pageNumber;
+            //Define a page size
+            int pageSize = 2;
+            int totalRecords = 0;
+            int totalPages = 0;
+
+            //either use the searchString or not
+            IQueryable<CategoryPost> result = null;
+            if(!string.IsNullOrEmpty(searchString))
+            {
+
+                //This is the end.
+
+               
+                //I have to search my records for the presence of the search string
+                result = _context.CategoryPost.AsQueryable();
+                searchString = searchString.ToLower();
+
+                result = result.Where(cp => cp.Title.ToLower().Contains(searchString) ||
+                                            cp.Content.ToLower().Contains(searchString) ||
+                                            cp.Abstract.ToLower().Contains(searchString) ||
+                                            //cp.BlogCategory.Name.ToLower().Contains(searchString) ||
+                                            cp.Comments.Any(c => c.Body.ToLower().Contains(searchString) ||
+                                                         c.BlogUser.FirstName.ToLower().Contains(searchString) ||
+                                                         c.BlogUser.LastName.ToLower().Contains(searchString) ||
+                                                         c.BlogUser.Email.ToLower().Contains(searchString)));
+                //Once this LINQ query executes, I can find out how many records and therefore how many pages
+                totalRecords = (await result.ToListAsync()).Count;
+
+            }
+            else
+            {
+                result = _context.CategoryPost.AsQueryable();
+                totalRecords = (await result.ToListAsync()).Count;
+            }
+            var remainder = totalRecords % pageSize;
+            if(totalRecords == 0)
+            {
+                totalPages = totalRecords;
+            }
+            else if((totalRecords % pageSize) > 0)
+            {
+                totalPages = Convert.ToInt32(totalRecords / pageSize) + 1;
+            }
+            else
+            {
+                totalPages = Convert.ToInt32(totalRecords / pageSize);
+            }
+
+            totalPages = totalRecords == 0 ? 0 : Convert.ToInt32(totalRecords / pageSize) + 1;
+            ViewData["TotalPages"] = totalPages;
+            pageNumber = pageNumber > totalPages ? totalPages : pageNumber;
+
+            if (totalPages > 0)
+            {
+                ViewData["PageXofY"] = $"You are viewing page {pageNumber} of {totalPages}";
+            }
+            else
+            {
+                ViewData["PageXofY"] = $"Your search yielded no results";
+            }
+            //ViewData["SearchString"] = searchString;
+            //var applicationDbContext = _context.CategoryPost.Include(c => c.BlogCategory);
+            var skipCount = ((int)pageNumber - 1) * pageSize;
+            
+
+            var categoryPosts = (await result.OrderByDescending(cp => cp.Created).ToListAsync()).Skip(skipCount).Take(pageSize);
+            return View(categoryPosts);
         }
 
-        public IActionResult CategoryIndex(int? id)
+        //public async Task<IActionResult> CategoryIndex(int? id)
+        //{
+        //    return View("Index", await _context.CategoryPost.Where(cp => cp.BlogCategoryId == id).ToListAsync());
+        //}
+
+        public async Task<IActionResult> CategoryIndex(int? id)
         {
 
             if (id == null)
@@ -46,42 +124,25 @@ namespace Blog.Controllers
             }
 
             //Write a LINQ statement that uses the Id to get all of the Blog osts with the Category Id FK = id
-            var posts = _context.CategoryPost.Where(cp => cp.BlogCategoryId == id).ToList();
+            var categoryPosts = await _context.CategoryPost.Where(cp => cp.BlogCategoryId == id).ToListAsync();
 
             //Once I have my Blog posts I want to display them in the Index view
-            return View("Index", posts);
+            return View("Index", categoryPosts);
         }
 
-        // GET: CategoryPosts/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        //GET: CategoryPosts/Details/5
 
-        //    var categoryPost = await _context.CategoryPost
-        //        .Include(c => c.BlogCategory)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (categoryPost == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(categoryPost);
-        //}   
-        public async Task<IActionResult> Details(string slug)
+        //COMMENT THIS OUT TO USE SLUGS
+        public async Task<IActionResult> Details(int? id)
         {
-            if (string.IsNullOrEmpty(slug))
+            if (id == null)
             {
                 return NotFound();
             }
 
             var categoryPost = await _context.CategoryPost
-                .Include(c => c.BlogCategory)
-                .Include(c => c.Comments)
-                .ThenInclude(p => p.BlogUser)
-                .FirstOrDefaultAsync(m => m.Slug == slug);
+                .Include(cp => cp.BlogCategory)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (categoryPost == null)
             {
                 return NotFound();
@@ -89,6 +150,28 @@ namespace Blog.Controllers
 
             return View(categoryPost);
         }
+
+        //UNCOMMENT THIS TO USE SLUGS
+
+        //public async Task<IActionResult> Details(string slug)
+        //{
+        //    if (string.IsNullOrEmpty(slug))
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var categoryPost = await _context.CategoryPost
+        //        .Include(cp => cp.BlogCategory)
+        //        .Include(cp => cp.Comments)
+        //        .ThenInclude(c => c.BlogUser)
+        //        .FirstOrDefaultAsync(m => m.Slug == slug);
+        //    if (categoryPost == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(categoryPost);
+        //}
 
         // GET: CategoryPosts/Create
         [Authorize(Roles = "Administrator")]
@@ -104,7 +187,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BlogCategoryId,Title,Abstract,Content,IsProductionReady,Slug,ImageData,ContentType")] CategoryPost categoryPost, IFormFile formFile)
+        public async Task<IActionResult> Create([Bind("Id,BlogCategoryId,Title,Abstract,Content,IsProductionReady,ImageData,ContentType")] CategoryPost categoryPost, IFormFile formFile)
         {
             if (ModelState.IsValid)
             {
@@ -134,7 +217,8 @@ namespace Blog.Controllers
 
                 _context.Add(categoryPost);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             ViewData["BlogCategoryId"] = new SelectList(_context.BlogCategory, "Id", "Name", categoryPost.BlogCategoryId);
             return View(categoryPost);

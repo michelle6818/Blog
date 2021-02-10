@@ -1,87 +1,146 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MyBlog</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link href="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <title>Michelle's Dev Blog</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog Template">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+    <link rel="shortcut icon" href="~/images/favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer src="~/js/all.min.js"></script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="~/css/theme-1.css">
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MyBlog</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        @if (User.IsInRole("Administrator"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="BlogCategories" asp-action="Index">List Categories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="CategoryPosts" asp-action="Index">List Posts</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="BlogCategories" asp-action="Create">Create Categories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="CategoryPosts" asp-action="Create">Create Posts</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tags" asp-action="Index">Tags</a>
-                            </li>
-                        }
-                        else if (User.IsInRole("Moderator") || User.IsInRole("Administrator"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Comments" asp-action="Index">Comments</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="BlogCategories" asp-action="Index">List Categories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="CategoryPosts" asp-action="Index">List Posts</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact Me</a>
-                            </li>
-                        }
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
+    
+    <header class="header text-center">
+        <partial name="_LoginPartial" />
+        <h1 class="blog-name pt-lg-4 mb-0">Michelle's Blog</h1>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navigation" class="collapse navbar-collapse flex-column">
+                <div class="profile-section pt-3 pt-lg-0">
+                    <img class="profile-image mb-3 rounded-circle mx-auto" src="~/images/Image10.jpg" alt="image">
+
+                    <div class="bio mb-3">
+                        Welcome! I am Michelle Longworth, a Full-Stack Web Developer. <br>
+                        @*<a href="about.html">Find out more about me</a>*@
+                    </div><!--//bio-->
+                    <ul class="social-list list-inline py-3 mx-auto">
+                        <li class="list-inline-item"><a href="https://twitter.com/MALongworth1" target="_blank"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.linkedin.com/in/michelle-longworth-16847b203" target="_blank"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="https://github.com/michelle6818" target="_blank"><i class="fab fa-github-alt fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                    <hr>
+                </div><!--//profile-section-->
+
+                <ul class="navbar-nav flex-column text-left">
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="BlogCategories" asp-action="Index"><i class="fas fa-home fa-fw mr-2"></i>Blog Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="CategoryPosts" asp-action="Index"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog Posts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="BlogCategories" asp-action="Create"><i class="fas fa-bookmark fa-fw mr-2"></i>Create Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="CategoryPosts" asp-action="Create"><i class="fas fa-bookmark fa-fw mr-2"></i>Create Posts</a>
+                        </li>
+                        <li>
+                            <form asp-controller="CategoryPosts" asp-action="Index" method="get">
+                                <input name="searchString" type="text" class="form-control" />
+                                <button type="submit" class="btn-outline-success">
+                                    <i class="fa-cog">Search</i>
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else if (User.IsInRole("Moderator") || User.IsInRole("Administrator"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Comments" asp-action="Index"><i class="fas fa-user fa-fw mr-2"></i>Comments</a>
+                        </li>
+                        <li>
+                            <form asp-controller="CategoryPosts" asp-action="Index" method="get">
+                                <input name="searchString" type="text" class="form-control" />
+                                <button type="submit" class="btn-sm btn-outline-success">
+                                    <i class="fa-cog">Search</i>
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="BlogCategories" asp-action="Index"><i class="fas fa-home fa-fw mr-2"></i>Blog Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="CategoryPosts" asp-action="Index"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog Posts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact"><i class="fas fa-user fa-fw mr-2"></i>Contact Me</a>
+                        </li>
+                        <li>
+                            <form asp-controller="CategoryPosts" asp-action="Index" method="get">
+                                <input name="searchString" type="text" class="form-control" />
+                                <button type="submit" class="btn-sm btn-outline-success">
+                                    <i class="fa-cog">Search</i>
+                                </button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+
+                @*<partial name="_LoginPartial" />*@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+    <div class="main-wrapper">
         <div class="container">
-            &copy; 2021 - MyBlog - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
+        @*<nav class="blog-nav nav nav-justified my-5">
+                <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+                <a class="nav-link-next nav-item nav-link rounded" href="#">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+            </nav>*@
+    </div>
+    <br />
+    <br />
+    <br />
+    <footer class="footer text-center py-2 theme-bg-dark">
+        <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @*<script src="~/js/jquery-3.4.1.min.js"></script>*@
+    @*<script src="~/js/popper.min.js"></script>*@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    @*<script src="//cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>tinymce.init({ selector: 'textarea' });</script>*@
     @await RenderSectionAsync("Scripts", required: false)
 
-<script>
-    $(document).ready(function () {
-        $("#Description, #Abstract, #Content, #Body, #ModeratedBody, #Message").summernote();
-    });
-</script>
+    <script>
+        $(document).ready(function () {
+            $("#Description, #Abstract, #Content, #Body, #ModeratedBody, #Message").summernote();
+        });
+    </script>
 </body>
 </html>

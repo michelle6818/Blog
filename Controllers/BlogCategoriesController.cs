@@ -21,6 +21,7 @@ namespace Blog.Controllers
 
         public BlogCategoriesController(
             ApplicationDbContext context,
+            ISlugService slugService,
             IImageService imageService)
         {
             _context = context;
@@ -43,8 +44,8 @@ namespace Blog.Controllers
 
             //Now that I have an id lets use it to go grab all of the blog posts
             //that have a foreign key that equals the id (all the children)
-            var posts = _context.CategoryPost.Where(cp => cp.BlogCategoryId == id).ToList();
-            return View(posts);
+            var categoryPosts = _context.CategoryPost.Where(cp => cp.BlogCategoryId == id).ToList();
+            return View(categoryPosts);
         }
 
 

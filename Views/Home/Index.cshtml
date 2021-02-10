@@ -1,24 +1,63 @@
-﻿@{
+﻿@using Blog.Services
+@model IEnumerable<BlogCategory>
+@inject IImageService imageService
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <h3><a class="nav-link text-dark" asp-area="" asp-controller="BlogCategories" asp-action="Index">Click to read our blogs</a></h3>
-</div>
+<section class="cta-section theme-bg-light py-5">
+    <div class="container text-center">
+        <h2 class="heading">Michelle's Dev Blog</h2>
+        <div class="intro">Welcome to my blog! Come along on my coding journey...</div>
+        @*<form class="signup-form form-inline justify-content-center pt-3">
+            <div class="form-group">
+                <label class="sr-only" for="semail">Your email</label>
+                <input type="email" id="semail" name="semail1" class="form-control mr-md-1 semail" placeholder="Enter email">
+            </div>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>*@
+    </div><!--//container-->
+</section>
 
-<hr />
+<section class="blog-list px-3 py-5 p-md-5">
+    <div class="container">
+        @foreach (var category in Model.OrderByDescending(b => b.Created))
+        {
+        <div class="item mb-5">
+            <div class="media">
+                <img src="@imageService.DecodeFile(category.ImageData, category.ContentType)" class="image-fluid">
+                <div class="media-body">
+                    <h3 class="title mb-1">@category.Name</h3>
+                    <span class="date meta mb-1">Published @category.Created.ToString("MMM dd, yyyy")</span>
+                    @*<span class="time">5 min read</span><span class="comment"><a href="#">8 comments</a></span></div>*@
+                    <div class="intro">@category.Description</div>
+                    <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@category.Id">Read more &rarr;</a>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</section>
+
+
+<!--//main-wrapper-->
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <h3><a class="nav-link text-dark" asp-area="" asp-controller="BlogCategories" asp-action="Index">Click to read our blogs</a></h3>
+    </div>*@
+
 @*How will I ask if the User is logged in at all*@
 @*@if (User.Identity.IsAuthenticated)
-{
-    <h1 class="text-center">Enter your comment below</h1>
-    <br />
-    <form>
-        <textarea></textarea>
-          <button type="submit" class="btn btn-dark">Share Comment</button>        
-       </form>
-}
-else
-{
-    <h1 class="text-center">LOGIN TO ENTER A COMMENT</h1>
-}*@
+    {
+        <h1 class="text-center">Enter your comment below</h1>
+        <br />
+        <form>
+            <textarea></textarea>
+              <button type="submit" class="btn btn-dark">Share Comment</button>
+           </form>
+    }
+    else
+    {
+        <h1 class="text-center">LOGIN TO ENTER A COMMENT</h1>
+    }*@

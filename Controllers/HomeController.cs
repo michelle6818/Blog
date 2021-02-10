@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Data;
 using Blog.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -14,22 +16,25 @@ namespace Blog.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _dbContext;
         private readonly IEmailSender _emailSender;
         private readonly MailSettings _mailSettings;
 
         public HomeController(
             ILogger<HomeController> logger,
+            ApplicationDbContext dbContext,
             IEmailSender emailSender,
             IOptions<MailSettings> mailSettings)
         {
             _logger = logger;
+            _dbContext = dbContext;
             _emailSender = emailSender;
             _mailSettings = mailSettings.Value;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _dbContext.BlogCategory.ToListAsync());
         }
 
         public IActionResult Privacy()

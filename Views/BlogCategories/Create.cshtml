@@ -4,13 +4,13 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>BlogCategory</h4>
+
+<h4>Create a new blog category</h4>
 <hr />
 <div class="row">
     <div class="col">
-            <form asp-action="Create" enctype="multipart/form-data">>
+            <form asp-action="Create" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="ImageData" class="control-label"></label>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
-                    <textarea asp-for="Description"></textarea>
+                    <textarea asp-for="Description" class="form-control"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
