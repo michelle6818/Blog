@@ -42,7 +42,7 @@ namespace Blog.Controllers
             //pageNumber ??= 1;
             ViewData["PageNumber"] = pageNumber;
             //Define a page size
-            int pageSize = 2;
+            int pageSize = 3;
             int totalRecords = 0;
             int totalPages = 0;
 
@@ -51,7 +51,6 @@ namespace Blog.Controllers
             if(!string.IsNullOrEmpty(searchString))
             {
 
-                //This is the end.
 
                
                 //I have to search my records for the presence of the search string
@@ -75,7 +74,7 @@ namespace Blog.Controllers
                 result = _context.CategoryPost.AsQueryable();
                 totalRecords = (await result.ToListAsync()).Count;
             }
-            var remainder = totalRecords % pageSize;
+            //var remainder = totalRecords % pageSize;
             if(totalRecords == 0)
             {
                 totalPages = totalRecords;
@@ -89,7 +88,7 @@ namespace Blog.Controllers
                 totalPages = Convert.ToInt32(totalRecords / pageSize);
             }
 
-            totalPages = totalRecords == 0 ? 0 : Convert.ToInt32(totalRecords / pageSize) + 1;
+            //totalPages = totalRecords == 0 ? 0 : Convert.ToInt32(totalRecords / pageSize) + 1;
             ViewData["TotalPages"] = totalPages;
             pageNumber = pageNumber > totalPages ? totalPages : pageNumber;
 
@@ -99,7 +98,7 @@ namespace Blog.Controllers
             }
             else
             {
-                ViewData["PageXofY"] = $"Your search yielded no results";
+                ViewData["PageXofY"] = $"Your search for '{@ViewBag.SearchString}' yielded no results";
             }
             //ViewData["SearchString"] = searchString;
             //var applicationDbContext = _context.CategoryPost.Include(c => c.BlogCategory);

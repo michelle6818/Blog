@@ -10,10 +10,13 @@
 <section class="blog-list px-3 py-5 p-md-5">
     <div class="container">
 
+        @{ var order = 1;}
         @foreach (var category in Model.OrderByDescending(b => b.Created))
         {
+            if (order % 2 == 0)
+            {
             <div class="item mb-5">
-                <!--<div class="media">
+                <div class="media">
                     <img src="@imageService.DecodeFile(category.ImageData, category.ContentType)" class="image-fluid">
                     <div class="media-body">
                         <h3 class="title mb-1">
@@ -21,10 +24,11 @@
                         </h3>
                         <span class="date meta mb-1">
                             Published @category.Created.ToString("MMM dd, yyyy")
-                        </span>-->
-                        @*<span class="date">Updated @category.Updated.ToString("MMM dd, yyyy")</span>*@
-                        @*<span class="time">5 min read</span><span class="comment"><a href="#">8 comments</a></span></div>*@
-                        <!--<div class="intro">
+                        </span>
+                        @*<span class="date">Updated @category.Updated.ToString("MMM dd, yyyy")</span>
+                        <span class="time">5 min read</span><span class="comment"><a href="#">8 comments</a></span>*@
+                    </div>
+                        <div class="intro">
                             @category.Description
                         </div>
                         <br />
@@ -35,12 +39,14 @@
                             }
                         </div>
                         <br />
-                        <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@category.Id">Read more &rarr;</a>
-                   
-                    
+                        <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@category.Id">Read more &rarr;</a>                   
                 </div>
-                </div>-->
-                <hr>
+             </div>
+             <hr />
+            }
+            else
+            {
+               
                 <div class="item mb-5">
                     <div class="media">
                         <div class="media-body">
@@ -69,10 +75,9 @@
                     </div>
                 </div>
                 <hr>
-                
+            }
 
-            </div>
-
+            order++;
         }
     </div>
 </section>

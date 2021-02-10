@@ -31,10 +31,27 @@ namespace Blog.Controllers
             var applicationDbContext = _context.Comment.Include(c => c.BlogUser).Include(c => c.CategoryPost);
             return View(await applicationDbContext.ToListAsync());
         }
+        //Get: Comments/Details
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        
+            var comment = await _context.Comment
+                .Include(c => c.CategoryPost)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
 
-        
+            return View(comment);
+        }
+
+
+
         // POST: Comments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -51,9 +68,10 @@ namespace Blog.Controllers
                 //var slug = _context.CategoryPost.Find(comment.CategoryPostId).Slug;
                 return RedirectToAction("Details", "CategoryPosts", new { slug });
             }
-            ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", comment.BlogUserId);
-            ViewData["CategoryPostId"] = new SelectList(_context.CategoryPost, "Id", "Id", comment.CategoryPostId);
-            return View(comment);
+            //ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", comment.BlogUserId);
+            //ViewData["CategoryPostId"] = new SelectList(_context.CategoryPost, "Id", "Id", comment.CategoryPostId);
+            //return View(comment);
+            return RedirectToAction("Details", "CategoryPosts", new { slug });
         }
 
         // GET: Comments/Edit/5
@@ -114,7 +132,35 @@ namespace Blog.Controllers
             return View(comment);
         }
 
+        // GET: PostComments/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var comment = await _context.Comment
+                .Include(c => c.CategoryPost)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            return View(comment);
+        }
+
+        // POST: PostComments/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var comment = await _context.Comment.FindAsync(id);
+            _context.Comment.Remove(comment);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
         private bool CommentExists(int id)
         {

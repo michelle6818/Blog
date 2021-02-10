@@ -526,3 +526,5 @@ C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Blog.RazorTargetAssemblyInfo.c
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Blog.Views.pdb
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Blog.csproj.CopyComplete
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Blog.genruntimeconfig.cache
+C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Comments\Delete.cshtml.g.cs
+C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Comments\Details.cshtml.g.cs

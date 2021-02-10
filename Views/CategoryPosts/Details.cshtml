@@ -22,43 +22,100 @@
             <p>@Html.Raw(Model.Content)</p>
         </div>
         @*<nav class="blog-nav nav nav-justified my-5">
-            <a class="nav-link-prev nav-item nav-link rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-            <a class="nav-link-next nav-item nav-link rounded-right" href="#">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
-        </nav>*@
+                <a class="nav-link-prev nav-item nav-link rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+                <a class="nav-link-next nav-item nav-link rounded-right" href="#">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+            </nav>*@
 
         <!--<div class="blog-comments-section">
-        <div id="disqus_thread"></div>
-        <script>
+            <div id="disqus_thread"></div>
+            <script>
 
-                    var disqus_config = function () {
-                        // Replace PAGE_URL with your page's canonical URL variable
-                        this.page.url = PAGE_URL;
+                        var disqus_config = function () {
+                            // Replace PAGE_URL with your page's canonical URL variable
+                            this.page.url = PAGE_URL;
 
-                        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                        this.page.identifier = PAGE_IDENTIFIER;
-                    };
-                    */
+                            // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                            this.page.identifier = PAGE_IDENTIFIER;
+                        };
+                        */
 
-                    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
-                        var d = document, s = d.createElement('script');
+                        (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+                            var d = document, s = d.createElement('script');
 
-                        // IMPORTANT: Replace 3wmthemes with your forum shortname!
-                        s.src = 'https://3wmthemes.disqus.com/embed.js';
+                            // IMPORTANT: Replace 3wmthemes with your forum shortname!
+                            s.src = 'https://3wmthemes.disqus.com/embed.js';
 
-                        s.setAttribute('data-timestamp', +new Date());
-                        (d.head || d.body).appendChild(s);
-                    })();
-        </script>
-        <noscript>
-            Please enable JavaScript to view the
-            <a href="https://disqus.com/?ref_noscript" rel="nofollow">
-                comments powered by Disqus.
-            </a>
-        </noscript>
-    </div>-->
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+            </script>
+            <noscript>
+                Please enable JavaScript to view the
+                <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+                    comments powered by Disqus.
+                </a>
+            </noscript>
+        </div>-->
         <!--//blog-comments-section-->
-        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-        <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> |
+        @if (User.IsInRole("Administrator"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        }
         <a asp-action="Index">Back to List</a>
     </div><!--//container-->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form asp-controller="Comments" asp-action="Create">
+            <input type="hidden" asp-for="Slug" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md">
+                        @Html.Hidden("CategoryPostId", Model.Id)
+
+                        <div class="form-group">
+                            <label class="control-label">Comment</label>
+                            @*<input asp-for="Body" class="form-control" />*@
+                            <textarea required name="Body" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-dark">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <h1>Please log in to add a comment</h1>
+    }
+    @foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
+    {
+        <div class="row">
+            <div class="col">
+                @comment.BlogUser.FullName
+            </div>
+            <div class="col">
+                @comment.Created.ToString("MMM dd, yyyy")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                @Html.Raw(comment.Body)
+            </div>
+        </div>
+    }
+    <br />
+    <div>
+        @if (User.IsInRole("Administrator"))
+        {
+            <a asp-controller="Comments" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        }|
+        @if (User.IsInRole("Moderator"))
+        {
+            <a asp-controller="Comments" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        }
+        <a asp-controller="Comments" asp-action="Index">Back to Comments</a>
+    </div>
 </article>

@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 using Blog.Data;
 using Blog.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Npgsql;
 
 namespace Blog.Utilites
 {
@@ -27,7 +30,35 @@ namespace Blog.Utilites
 
 
     public static class DataUtility
-    {                          //Wrapper Method (ManageDataAsync)
+    {                          
+        public static string GetConnectionString(IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+            return string.IsNullOrEmpty(databaseUrl) ? connectionString : BuildConnectionString(databaseUrl);
+        }
+        
+        public static string BuildConnectionString(string databaseUrl)
+        {
+            var databaseUri = new Uri(databaseUrl);
+            var userInfo = databaseUri.UserInfo.Split(':');
+
+            var builder = new NpgsqlConnectionStringBuilder
+            {
+                Host = databaseUri.Host,
+                Port = databaseUri.Port,
+                Username = userInfo[0],
+                Password = userInfo[1],
+                Database = databaseUri.LocalPath.TrimStart('/'),
+                SslMode = SslMode.Prefer,
+                TrustServerCertificate = true
+            };
+
+            return builder.ToString();
+        }
+        
+        //Wrapper Method (ManageDataAsync)
         public static async Task ManageDataAsync(IHost host)
         {
             //This technique is used to obtain references to services that get registered in 
@@ -46,6 +77,8 @@ namespace Blog.Utilites
             //Service 3: An instance of UserManager
             var userManagerSvc = svcProvider.GetRequiredService<UserManager<BlogUser>>();
 
+            //This is the programmatic equivalent to Update-Database
+            await dbContextSvc.Database.MigrateAsync();
 
             //Step 1: Add a few Roles into the system (Administrator & Moderator)
             //Call the SeedRolesAsync method and pass it the role service
