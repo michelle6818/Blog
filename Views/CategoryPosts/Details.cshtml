@@ -100,7 +100,7 @@
         {
             <div class="row text-center">
                 <div class="col">
-                    @Html.Raw(comment.Body)
+                    @Html.Raw(comment.ModeratedBody)
                 </div>
             </div>
         }
@@ -108,7 +108,7 @@
         {
             <div class="row text-center">
                 <div class="col">
-                    @Html.Raw(comment.ModeratedBody)
+                    @Html.Raw(comment.Body)
                 </div>
             </div>
         }

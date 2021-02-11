@@ -8,7 +8,7 @@
 }
 
 <section class="blog-list px-3 py-5 p-md-5">
-    <div class="container">
+    
 
         @{ var order = 1;}
         @foreach (var category in Model.OrderByDescending(b => b.Created))
@@ -17,30 +17,24 @@
             {
             <div class="item mb-5">
                 <div class="media">
-                    <img src="@imageService.DecodeFile(category.ImageData, category.ContentType)" class="image-fluid">
+                    <img src="@imageService.DecodeFile(category.ImageData, category.ContentType)" class="mr-6 img-fluid d-none d-md-flex" alt="image">
                     <div class="media-body">
-                        <h3 class="title mb-1">
-                            @category.Name
-                        </h3>
-                        <span class="date meta mb-1">
-                            Published @category.Created.ToString("MMMM dd, yyyy")
-                        </span>
-                        @*<span class="date">Updated @category.Updated.ToString("MMM dd, yyyy")</span>
-                        <span class="time">5 min read</span><span class="comment"><a href="#">8 comments</a></span>*@
-                    </div>
-                        <div class="intro">
-                            @category.Description
+                        <h3 class="title ml-3 mb-1">@category.Name</h3>
+                        <div class="meta ml-3 mb-1">
+                        <span>Published @category.Created.ToString("MMMM dd, yyyy")</span>
                         </div>
+                        <div class="intro ml-3 mb-1">@category.Description</div>
                         <br />
-                        <div>
+                        <div class="ml-3">
                             @if (User.IsInRole("Administrator"))
                             {
                                 <a asp-action="Details" asp-route-id="@category.Id">Administrative Controls</a>
                             }
                         </div>
                         <br />
-                        <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@category.Id">Read more &rarr;</a>                   
-                </div>
+                        <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@category.Id" class="ml-3">Read more &rarr;</a>                   
+                     </div>
+                 </div>
              </div>
              <hr />
             }
@@ -71,7 +65,7 @@
                             <br />
                             <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@category.Id">Read more &rarr;</a>
                        </div>
-                        <img src="@imageService.DecodeFile(category.ImageData, category.ContentType)" class="image-fluid">
+                        <img src="@imageService.DecodeFile(category.ImageData, category.ContentType)" class="ml-3 img-fluid d-none d-md-flex" alt="image">
                     </div>
                 </div>
                 <hr>
@@ -79,7 +73,7 @@
 
             order++;
         }
-    </div>
+   
 </section>
 
 

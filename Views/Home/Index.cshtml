@@ -8,8 +8,8 @@
 
 <body>
 
-  <section class="cta-section theme-bg-light py-5">
-    <div class="container text-center">
+  <section class="cta-section theme-bg-light py-5 text-center">
+    
         <h2 class="heading">Michelle's Dev Blog</h2>
         <div class="intro">Welcome to my blog! Come along on my coding journey...</div>
         @*<form class="signup-form form-inline justify-content-center pt-3">
@@ -19,11 +19,11 @@
             </div>
             <button type="submit" class="btn btn-primary">Subscribe</button>
         </form>*@
-    </div><!--//container-->
+   <!--//container-->
   </section>
 
   <section class="blog-list px-3 py-5 p-md-5">
-    <div class="container">
+   
         @foreach (var category in Model.OrderByDescending(b => b.Created))
         {
         <div class="item mb-5">
@@ -41,7 +41,7 @@
             </div>
         </div>
         }
-    </div>
+   
   </section>
 
 </body>
