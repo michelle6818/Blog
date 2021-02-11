@@ -26,7 +26,8 @@ namespace Blog.Models
         //Properties for the Moderator of Comments
         [DataType(DataType.Date)]
         public DateTime? Moderated { get; set; }
-        //public bool HasBeenModerated { get; set; }
+        [Display(Name = "Moderated?")]
+        public bool HasBeenModerated { get; set; }
         [Display(Name = "Reason")]
         public string ModeratedReason { get; set; }
         [Display(Name = "Moderated Content")]

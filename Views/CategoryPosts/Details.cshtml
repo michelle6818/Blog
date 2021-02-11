@@ -12,7 +12,7 @@
         <header class="blog-post-header">
             <h2 class="title mb-2">@Model.Title</h2>
             <h6 class="subheading">@Model.Abstract</h6>
-            <div class="meta mb-3"><span class="date">Published on @Model.Created.ToString("MMM dd, yyyy")</span></div>
+            <div class="meta mb-3"><span class="date">Published on @Model.Created.ToString("MMMM dd, yyyy")</span></div>
         </header>
 
         <div class="blog-post-body">
@@ -56,8 +56,9 @@
                 </a>
             </noscript>
         </div>-->
-        
+
     </div><!--//container-->
+    <br /><br />
     @if (User.Identity.IsAuthenticated)
     {
         <form asp-controller="Comments" asp-action="Create">
@@ -73,7 +74,7 @@
                             <textarea required name="Body" class="form-control"></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-dark">
+                            <input type="submit" value="Create" class="btn btn-success">
                         </div>
                     </div>
                 </div>
@@ -82,41 +83,55 @@
     }
     else
     {
-        <h1>Please log in to add a comment</h1>
+        <h5 class="text-center">Please <a asp-area="Identity" asp-page="/Account/Login">LOG IN </a>to add your comment!</h5>
     }
+    <br /><br />
     @foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
     {
-        <div class="row">
+        <div class="row text-center">
             <div class="col">
                 @comment.BlogUser.FullName
             </div>
             <div class="col">
-                @comment.Created.ToString("MMM dd, yyyy")
+                @comment.Created.ToString("MMMM dd, yyyy")
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                @Html.Raw(comment.Body)
+        @if (comment.HasBeenModerated)
+        {
+            <div class="row text-center">
+                <div class="col">
+                    @Html.Raw(comment.Body)
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="row text-center">
+                <div class="col">
+                    @Html.Raw(comment.ModeratedBody)
+                </div>
+            </div>
+        }
     }
     <br />
-    <div>
+    <div class="text-center">
         @if (User.IsInRole("Administrator"))
         {
-            <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-            <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id">Edit Post|</a>
         }
-       
         @if (User.IsInRole("Administrator"))
         {
-            <a asp-controller="Comments" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-        }|
+            <a asp-action="Delete" asp-route-id="@Model.Id">Delete Post|</a>
+        }
+
+        @if (User.IsInRole("Administrator"))
+        {
+            <a asp-controller="Comments" asp-action="Index" asp-route-id="@Model.Id">Edit Comment</a>
+        }
         @if (User.IsInRole("Moderator"))
         {
-            <a asp-controller="Comments" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-        }
-        <a asp-controller="Comments" asp-action="Index">Back to Comments</a>
+            <a asp-controller="Comments" asp-action="Index" asp-route-id="@Model.Id">Edit Comment</a>
+        } |
         <a asp-action="Index">Back to Posts</a>
     </div>
 </article>

@@ -6,7 +6,9 @@
     ViewData["Title"] = "Home Page";
 }
 
-<section class="cta-section theme-bg-light py-5">
+<body>
+
+  <section class="cta-section theme-bg-light py-5">
     <div class="container text-center">
         <h2 class="heading">Michelle's Dev Blog</h2>
         <div class="intro">Welcome to my blog! Come along on my coding journey...</div>
@@ -18,18 +20,20 @@
             <button type="submit" class="btn btn-primary">Subscribe</button>
         </form>*@
     </div><!--//container-->
-</section>
+  </section>
 
-<section class="blog-list px-3 py-5 p-md-5">
+  <section class="blog-list px-3 py-5 p-md-5">
     <div class="container">
         @foreach (var category in Model.OrderByDescending(b => b.Created))
         {
         <div class="item mb-5">
             <div class="media">
-                <img src="@imageService.DecodeFile(category.ImageData, category.ContentType)" class="image-fluid">
+                <img src="@imageService.DecodeFile(category.ImageData, category.ContentType)" class="mr-3 img-fluid post-thumb d-none d-md-flex" alt="image">
                 <div class="media-body">
                     <h3 class="title mb-1">@category.Name</h3>
-                    <span class="date meta mb-1">Published @category.Created.ToString("MMM dd, yyyy")</span>
+                    <div class="meta mb-1">
+                    <span>Published @category.Created.ToString("MMMM dd, yyyy")</span>
+                        </div>
                     @*<span class="time">5 min read</span><span class="comment"><a href="#">8 comments</a></span></div>*@
                     <div class="intro">@category.Description</div>
                     <a asp-controller="CategoryPosts" asp-action="CategoryIndex" asp-route-id="@category.Id">Read more &rarr;</a>
@@ -38,9 +42,9 @@
         </div>
         }
     </div>
-</section>
+  </section>
 
-
+</body>
 <!--//main-wrapper-->
 @*<div class="text-center">
         <h1 class="display-4">Welcome</h1>
