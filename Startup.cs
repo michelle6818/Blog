@@ -100,10 +100,10 @@ namespace Blog
             app.UseEndpoints(endpoints =>
             {
                 //UNCOMMENT THIS FOR SLUGS
-                //endpoints.MapControllerRoute(
-                //    name: "slugRoute",
-                //    pattern: "Posts/TheDetails/{slug}",
-                //    defaults: new { controller = "CategoryPosts", action = "Details" });
+                endpoints.MapControllerRoute(
+                    name: "slugRoute",
+                    pattern: "Posts/TheDetails/{slug}",
+                    defaults: new { controller = "CategoryPosts", action = "Details" });
 
                 endpoints.MapControllerRoute(
                     name: "default",

@@ -132,38 +132,16 @@ namespace Blog.Controllers
         //GET: CategoryPosts/Details/5
 
         //COMMENT THIS OUT TO USE SLUGS
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var categoryPost = await _context.CategoryPost
-                .Include(cp => cp.BlogCategory)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (categoryPost == null)
-            {
-                return NotFound();
-            }
-
-            return View(categoryPost);
-        }
-
-        //UNCOMMENT THIS TO USE SLUGS
-
-        //public async Task<IActionResult> Details(string slug)
+        //public async Task<IActionResult> Details(int? id)
         //{
-        //    if (string.IsNullOrEmpty(slug))
+        //    if (id == null)
         //    {
         //        return NotFound();
         //    }
 
         //    var categoryPost = await _context.CategoryPost
         //        .Include(cp => cp.BlogCategory)
-        //        .Include(cp => cp.Comments)
-        //        .ThenInclude(c => c.BlogUser)
-        //        .FirstOrDefaultAsync(m => m.Slug == slug);
+        //        .FirstOrDefaultAsync(m => m.Id == id);
         //    if (categoryPost == null)
         //    {
         //        return NotFound();
@@ -171,6 +149,28 @@ namespace Blog.Controllers
 
         //    return View(categoryPost);
         //}
+
+        //UNCOMMENT THIS TO USE SLUGS
+
+        public async Task<IActionResult> Details(string slug)
+        {
+            if (string.IsNullOrEmpty(slug))
+            {
+                return NotFound();
+            }
+
+            var categoryPost = await _context.CategoryPost
+                .Include(cp => cp.BlogCategory)
+                .Include(cp => cp.Comments)
+                .ThenInclude(c => c.BlogUser)
+                .FirstOrDefaultAsync(m => m.Slug == slug);
+            if (categoryPost == null)
+            {
+                return NotFound();
+            }
+
+            return View(categoryPost);
+        }
 
         // GET: CategoryPosts/Create
         [Authorize(Roles = "Administrator")]
