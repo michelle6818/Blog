@@ -40,7 +40,7 @@
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    <div class="col-md-6 col-md-offset-2 text-center">
         <section>
             <h4>Use another service to register.</h4>
             <hr />
@@ -60,9 +60,13 @@
                         <div>
                             <p>
                                 @foreach (var provider in Model.ExternalLogins)
-                                {
+                                {   <div class="col text-center">
+                                    <div class="row text-center">
                                     <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
+                                     </div>
+                                    </div>
+                                     <br />
+                                }   
                             </p>
                         </div>
                     </form>

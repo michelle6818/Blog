@@ -57,8 +57,8 @@ namespace Blog
             services.AddAuthentication()
                 .AddGitHub(options =>
                 {
-                    options.ClientId = "60feb9f7d449db43a31f";
-                    options.ClientSecret = "6167f7385e6c2c5f727ea5a893a44efa3f89a294";
+                    options.ClientId = "6682fe182ad27ab21e7e";
+                    options.ClientSecret = "0f3b22ee06dc50230adafecb2ce38751f76128b6";
                     options.AccessDeniedPath = "/AccessDeniedPathInfo";
                 });
             //facebook
@@ -66,7 +66,24 @@ namespace Blog
                 .AddFacebook(options =>
                 {
                     options.AppId = "204427018038372";
-                    options.AppSecret = "e0c7e6df28ad2570cf043915857e9f49";
+                    options.AppSecret = "a85cb6ff663b95f1ececd8f15be76364";
+                    options.AccessDeniedPath = "/AccessDeniedPathInfo";
+                });
+            //twitter
+            services.AddAuthentication()
+                .AddTwitter(options =>
+                {
+                    options.ConsumerKey = "ibCCJpqOLKwNJDc5BdWeuByBW";
+                    options.ConsumerSecret = "SCBGAsyDZ1zE8NZI9r3kGHXdJ0KCtggb60LFFdaZ5NftQzNQyJ";
+                    options.RetrieveUserDetails = true;
+                    options.AccessDeniedPath = "/AccessDeniedPathInfo";
+                });
+            //google
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = "227791669845-4cggpk919e67oaoauaoqiqpihtc3mile.apps.googleusercontent.com";
+                    options.ClientSecret = "ZI_ZjdSYPkfGoCxtSd5eESbR";
                     options.AccessDeniedPath = "/AccessDeniedPathInfo";
                 });
 
