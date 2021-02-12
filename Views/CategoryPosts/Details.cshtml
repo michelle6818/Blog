@@ -126,11 +126,11 @@
 
         @if (User.IsInRole("Administrator"))
         {
-            <a asp-controller="Comments" asp-action="Index" asp-route-id="@Model.Id">Edit Comment</a>
+            <a asp-controller="Comments" asp-action="Index" asp-route-id="@Model.Id">Moderate Comment</a>
         }
         @if (User.IsInRole("Moderator"))
         {
-            <a asp-controller="Comments" asp-action="Index" asp-route-id="@Model.Id">Edit Comment</a>
+            <a asp-controller="Comments" asp-action="Index" asp-route-id="@Model.Id">Moderate Comment</a>
         } |
         <a asp-action="Index">Back to Posts</a>
     </div>
