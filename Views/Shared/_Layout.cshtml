@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Michelle's Dev Blog</title>
+    <link rel="icon" type="image/x-icon" href="~/images/M6.jpg" />
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -9,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Blog Template">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
-    <link rel="shortcut icon" href="~/images/favicon.ico">
+    <link rel="shortcut icon" href="~/images/M6.jpg">
 
     <!-- FontAwesome JS-->
     <script defer src="~/js/all.min.js"></script>
@@ -132,15 +133,15 @@
     @*<script src="~/js/jquery-3.4.1.min.js"></script>*@
     @*<script src="~/js/popper.min.js"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    @*<script src="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>*@
     @*<script src="//cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>tinymce.init({ selector: 'textarea' });</script>*@
     @await RenderSectionAsync("Scripts", required: false)
 
-    <script>
+    @*<script>
         $(document).ready(function () {
             $("#Description, #Abstract, #Content, #Body, #ModeratedBody, #Message").summernote();
         });
-    </script>
+    </script>*@
 </body>
 </html>

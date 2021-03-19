@@ -68,9 +68,7 @@ namespace Blog.Controllers
                 //var slug = _context.CategoryPost.Find(comment.CategoryPostId).Slug;
                 return RedirectToAction("Details", "CategoryPosts", new { slug });
             }
-            //ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", comment.BlogUserId);
-            //ViewData["CategoryPostId"] = new SelectList(_context.CategoryPost, "Id", "Id", comment.CategoryPostId);
-            //return View(comment);
+         
             return RedirectToAction("Details", "CategoryPosts", new { slug });
         }
 

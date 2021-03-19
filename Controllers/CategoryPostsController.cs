@@ -37,7 +37,6 @@ namespace Blog.Controllers
 
             //Want to look at the incoming pageNumber variable and either use it or force it to be 1
             //use Null coelesing operator
-            //loop++  same as loop +=1
             pageNumber = pageNumber == null || pageNumber <= 0 ? 1 : pageNumber;
             //pageNumber ??= 1;
             ViewData["PageNumber"] = pageNumber;
@@ -129,28 +128,10 @@ namespace Blog.Controllers
             return View("Index", categoryPosts);
         }
 
-        //GET: CategoryPosts/Details/5
-
-        //COMMENT THIS OUT TO USE SLUGS
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var categoryPost = await _context.CategoryPost
-        //        .Include(cp => cp.BlogCategory)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (categoryPost == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(categoryPost);
-        //}
+       
 
         //UNCOMMENT THIS TO USE SLUGS
+        //GET: CategoryPosts/Details/5
 
         public async Task<IActionResult> Details(string slug)
         {
