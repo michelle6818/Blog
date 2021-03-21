@@ -11,16 +11,16 @@
     //by finding the username
     //var person = await UserManager.FindByNameAsync(User.Identity.Name);
    
-    <div class="row text-center">
-        <div class="col text-center">
+    <div class="row justify-content-center">
+        
     <li class="nav-item text-center">
         <form class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button type="submit" class="nav-link btn btn-link">Logout</button>
+            <button type="submit" class="offset-5 nav-link btn btn-link">Logout</button>
         </form>
         <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
     </li>
         </div>
-        </div>
+       
 }
 else
 {
