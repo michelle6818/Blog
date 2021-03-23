@@ -57,24 +57,24 @@ namespace Blog
             services.AddAuthentication()
                 .AddGitHub(options =>
                 {
-                    options.ClientId = "6682fe182ad27ab21e7e";
-                    options.ClientSecret = "0f3b22ee06dc50230adafecb2ce38751f76128b6";
+                    options.ClientId = "2e1eac3525a9a20c0cd5";
+                    options.ClientSecret = "b5a7c22898aac93b73c5964497e2cc643edaa501";
                     options.AccessDeniedPath = "/AccessDeniedPathInfo";
                 });
             //facebook
             services.AddAuthentication()
                 .AddFacebook(options =>
                 {
-                    options.AppId = "204427018038372";
-                    options.AppSecret = "a85cb6ff663b95f1ececd8f15be76364";
+                    options.AppId = "513804523343027";
+                    options.AppSecret = "24760b675debcc02f0cba8517f7c6b1c";
                     options.AccessDeniedPath = "/AccessDeniedPathInfo";
                 });
             //twitter
             services.AddAuthentication()
                 .AddTwitter(options =>
                 {
-                    options.ConsumerKey = "ibCCJpqOLKwNJDc5BdWeuByBW";
-                    options.ConsumerSecret = "SCBGAsyDZ1zE8NZI9r3kGHXdJ0KCtggb60LFFdaZ5NftQzNQyJ";
+                    options.ConsumerKey = "isCAfIz7Dm0IbeU40ZgrHNkq1";
+                    options.ConsumerSecret = "tROc9JTz27BLNcVUqwTSUglhSsubaMV54u3gCj8kmAYI7aWfhQ";
                     options.RetrieveUserDetails = true;
                     options.AccessDeniedPath = "/AccessDeniedPathInfo";
                 });
@@ -82,8 +82,8 @@ namespace Blog
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    options.ClientId = "227791669845-4cggpk919e67oaoauaoqiqpihtc3mile.apps.googleusercontent.com";
-                    options.ClientSecret = "ZI_ZjdSYPkfGoCxtSd5eESbR";
+                    options.ClientId = "972171024296-omo8nlnmkjm192g7f08g57bh3kjqtn70.apps.googleusercontent.com";
+                    options.ClientSecret = "8zrFx1q-JoUhi74xGgTcGHG1";
                     options.AccessDeniedPath = "/AccessDeniedPathInfo";
                 });
 

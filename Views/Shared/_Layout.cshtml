@@ -18,10 +18,11 @@
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="~/css/theme-1.css">
     @*<link href="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">*@
+    <link href="~/css/summernote-bs4.css" rel="stylesheet">
 
 </head>
 <body>
-    
+
     <header class="header text-center">
         <partial name="_LoginPartial" />
         <h1 class="blog-name pt-lg-4 mb-0">Michelle's Blog </h1>
@@ -108,7 +109,7 @@
                     }
                 </ul>
 
-              
+
             </div>
         </nav>
     </header>
@@ -119,30 +120,27 @@
                 @RenderBody()
             </main>
         </div>
-        @*<nav class="blog-nav nav nav-justified my-5">
-                <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-                <a class="nav-link-next nav-item nav-link rounded" href="#">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
-            </nav>*@
+
     </div>
     <br />
     <br />
     <br />
     @*<footer class="footer text-center py-2 theme-bg-dark">
-        <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
-    </footer>*@
+            <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+        </footer>*@
 
-    @*<script src="~/js/jquery-3.4.1.min.js"></script>*@
-    @*<script src="~/js/popper.min.js"></script>*@
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     @*<script src="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>*@
-    @*<script src="//cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-        <script>tinymce.init({ selector: 'textarea' });</script>*@
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/summernote-bs4.js"></script>
 
-    @*<script>
-        $(document).ready(function () {
-            $("#Name, #Description, #Abstract, #Content, #Body, #ModeratedBody, #Message").summernote();
-        });
-    </script>*@
+
+    <script>
+            $(document).ready(function () {
+                $("#Name, #Description, #Abstract, #Content, #Body, #ModeratedBody, #Message").summernote();
+            });
+        </script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

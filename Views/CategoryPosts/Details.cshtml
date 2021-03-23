@@ -19,7 +19,11 @@
             <figure class="blog-banner">
                 <img src="@imageService.DecodeFile(Model.ImageData, Model.ContentType)" class="image-fluid">
             </figure>
-            <p>@Html.Raw(Model.Content)</p>
+            <div class="row">
+                <div class="card-body mx-auto">
+                    <h4><p style="margin-bottom: 0in; line-height: 200%">@Html.Raw(Model.Content)</p></h4>
+                </div>
+            </div>
         </div>
        
 
