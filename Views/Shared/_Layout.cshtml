@@ -114,7 +114,7 @@
         </nav>
     </header>
 
-    <div class="main-wrapper">
+    <div class="main-wrapper" style="background-color:#f3fbf4">
         <div class="container">
             <main role="main" class="pb-3">
                 @RenderBody()
@@ -122,9 +122,7 @@
         </div>
 
     </div>
-    <br />
-    <br />
-    <br />
+   
     @*<footer class="footer text-center py-2 theme-bg-dark">
             <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
         </footer>*@
@@ -135,12 +133,13 @@
     @*<script src="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>*@
     <script src="~/js/summernote-bs4.js"></script>
 
-
+ @section scripts{ 
     <script>
             $(document).ready(function () {
                 $("#Name, #Description, #Abstract, #Content, #Body, #ModeratedBody, #Message").summernote();
             });
         </script>
+    }
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

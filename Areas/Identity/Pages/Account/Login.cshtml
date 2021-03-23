@@ -72,33 +72,36 @@
                                     switch (provider.Name)
                                     //(provider.DisplayName.ToUpper())
                                     {
-                                     
+
                                         case "GitHub":
                                             <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Login with @provider.DisplayName</button>
                                             break;
-                                            <br />
+                                        <br />
                                         case "Facebook":
                                             <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Login with @provider.DisplayName</button>
-                                            break;  
-                                            <br />
-                                     case "Twitter":
-                                     <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Login with @provider.DisplayName</button>
-                                      break;
-                                            <br />
-                                       case "Google":
-                                      <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Login with @provider.DisplayName</button>
-                                        break;
-                                      
+                                            break;
+                                        <br />
+                                        case "Twitter":
+                                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Login with @provider.DisplayName</button>
+                                            break;
+                                        <br />
+                                        case "Google":
+                                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Login with @provider.DisplayName</button>
+                                            break;
+
                                     }
                                 }
                             </p>
                         </div>
                     </form>
                 }
-               }
+            }
+
         </section>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
     </div>
-</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

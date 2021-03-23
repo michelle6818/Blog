@@ -13,27 +13,52 @@
 
 
 <section class="blog-list px-3 py-5 p-md-5">
-          
-        @foreach (var categoryPost in Model.OrderByDescending(cp => cp.Created))
+
+  
+        @{ var order = 1;}
+        @foreach (var categoryPost in Model.OrderByDescending(b => b.Created))
         {
-         <div class="item mb-5">
-                <div class="media">
-                    <img src="@imageService.DecodeFile(categoryPost.ImageData, categoryPost.ContentType)" class="mr-3 img-fluid d-none d-md-flex" alt="image">
-                    <div class="media-body">
-                        <h3 class="title ml-3 mb-1">@categoryPost.Title</h3>
-                        <div class="meta ml-3 mb-1">
-                            <span>Published @categoryPost.Created.ToString("MMMM dd, yyyy")</span>
+            if (order % 2 == 0)
+            {
+                <div class="item mb-5">
+                    <div class="media">
+                        <img src="@imageService.DecodeFile(categoryPost.ImageData, categoryPost.ContentType)" class="mr-3 img-fluid d-none d-md-flex" alt="image">
+                        <div class="media-body">
+                            <h3 class="title ml-3 mb-1">@categoryPost.Title</h3>
+                            <div class="meta ml-3 mb-1">
+                                <span>Published @categoryPost.Created.ToString("MMMM dd, yyyy")</span>
+                            </div>
+
+                            <div class="intro ml-3 mb-1">@Html.Raw(categoryPost.Abstract)</div>
+                            <br />
+                            <a asp-action="Details" asp-route-slug="@categoryPost.Slug" class="ml-3">Read more &rarr;</a>
                         </div>
-                       
-                        <div class="intro ml-3 mb-1">@Html.Raw(categoryPost.Abstract)</div>
-                        <br />
-                        <a asp-action="Details" asp-route-slug="@categoryPost.Slug" class="ml-3">Read more &rarr;</a>
                     </div>
                 </div>
-          </div>        
-          <hr>
-        }   
-</section>
+                <hr>
+            }
+            else
+            {
+                <div class="item mb-5">
+                    <div class="media">
+                        <div class="media-body">
+                            <h3 class="title ml-3 mb-1">@categoryPost.Title</h3>
+                            <div class="meta ml-3 mb-1">
+                                <span>Published @categoryPost.Created.ToString("MMMM dd, yyyy")</span>
+                            </div>
+
+                            <div class="intro ml-3 mb-1">@Html.Raw(categoryPost.Abstract)</div>
+                            <br />
+                            <a asp-action="Details" asp-route-slug="@categoryPost.Slug" class="ml-3">Read more &rarr;</a>
+                        </div>
+                        <img src="@imageService.DecodeFile(categoryPost.ImageData, categoryPost.ContentType)" class="ml-3 img-fluid d-none d-md-flex" alt="image">
+                    </div>
+                </div>
+                <hr>
+            }
+            order++;
+        }
+    </section>
 
 <div class="row text-center">
     <div class="col">

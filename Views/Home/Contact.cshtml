@@ -15,58 +15,59 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    @*<link href="css/bootstrap.min.css" rel="stylesheet">*@
+    @*<link href="css/style.css" rel="stylesheet">*@
 
 </head>
 
-<body>
+<body style="height:100%">
 
 
 
-    <main id="main">
 
-        <!-- ======= Contact Section ======= -->
-        <div class="container text-center">
-            <section class="cta-section theme-bg-light py-5">        
-                    <h2 class="heading">Michelle's Dev Blog</h2>
-                    <div class="intro">Please feel free to contact me anytime!</div>              
-            </section>         
-                <div class="row mt-2 text-center">                  
-                    <div class="col">
-                        <form asp-action="Contact">
-                            <br>
-                            <br>
-                            <br>
-                            <div class="form-row text-center">
-                                <div class="col-md-6 form-group">
-                                    <input type="text" name="FirstName" class="form-control" id="FirstName" required placeholder="First Name" />
-                                    <div class="validate"></div>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <input type="text" name="LastName" class="form-control" id="LastName" required placeholder="Last Name" />
-                                    <div class="validate"></div>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <input type="email" class="form-control" name="Email" id="Email" required placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                                    <div class="validate"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
 
-                                <textarea asp-for="Message" class="form-control" rows="5" required placeholder="How may I help you today?"></textarea>
-                                <div class="validate"></div>
-                            </div>
-                            <div class="text-center"><button type="submit" id="button" class="btn-success">Send Message</button></div>
-
-                        </form>
-
+    <!-- ======= Contact Section ======= -->
+    <div class="container text-center" style="height:100%">
+        <section class="cta-section theme-bg-light py-5">
+            <h2 class="heading">Michelle's Dev Blog</h2>
+            <div class="intro">Please feel free to contact me anytime!</div>
+        </section>
+        <div class="row mt-2 text-center">
+            <div class="col">
+                <form asp-action="Contact">
+                    <br>
+                    <br>
+                    <br>
+                    <div class="form-row text-center">
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="FirstName" class="form-control" id="FirstName" required placeholder="First Name" />
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="LastName" class="form-control" id="LastName" required placeholder="Last Name" />
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <input type="email" class="form-control" name="Email" id="Email" required placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                            <div class="validate"></div>
+                        </div>
                     </div>
+                    <div class="form-group">
 
-                </div>
+                        <textarea asp-for="Message" class="form-control" rows="5" required placeholder="How may I help you today?"></textarea>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="text-center"><button type="submit" id="button" class="btn-success">Send Message</button></div>
+
+                </form>
+
             </div>
         </div>
-        </section><!-- End Contact Section -->
+    </div>
+    </div>
+    </section><!-- End Contact Section -->
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
 
     </main><!-- End #main -->
 </body>
