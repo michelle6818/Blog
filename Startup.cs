@@ -57,8 +57,8 @@ namespace Blog
             services.AddAuthentication()
                 .AddGitHub(options =>
                 {
-                    options.ClientId = "2e1eac3525a9a20c0cd5";
-                    options.ClientSecret = "b5a7c22898aac93b73c5964497e2cc643edaa501";
+                    options.ClientId = "c072a4764105f916e3bf";
+                    options.ClientSecret = "915baa709ca75bae967acc716cf51f02851c7b32";
                     options.AccessDeniedPath = "/AccessDeniedPathInfo";
                 });
             //facebook
