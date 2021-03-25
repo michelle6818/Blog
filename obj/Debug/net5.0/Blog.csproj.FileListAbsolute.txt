@@ -529,3 +529,10 @@ C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Blog.genruntimeconfig.cache
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Comments\Delete.cshtml.g.cs
 C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\Comments\Details.cshtml.g.cs
 C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\wwwroot\Images\Image10.jpg
+C:\Users\Owner\source\repos\Blog\obj\Debug\net5.0\Razor\Views\CategoryPosts\SummernoteTest.cshtml.g.cs
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Owner\source\repos\Blog\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll

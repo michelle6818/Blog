@@ -128,7 +128,10 @@ namespace Blog.Controllers
             return View("Index", categoryPosts);
         }
 
-       
+       public IActionResult SummernoteTest()
+        {
+            return View();
+        }
 
         //UNCOMMENT THIS TO USE SLUGS
         //GET: CategoryPosts/Details/5

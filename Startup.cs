@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace Blog
 {
@@ -53,12 +54,26 @@ namespace Blog
             //Register our new BasicImageService
             services.AddTransient<IImageService, BasicImageService>();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {
+                    Title = "Michelle's Dev Blog",
+                    Version = "v1",
+                    Description = "Michelle's Development Blog",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Michelle Longworth",
+                        Email = "mlongworth@alumni.unc.edu",
+                        Url = new Uri("https://michellelongworth-portfolio.netlify.app")
+                    }
+                });
+            });
             //github
             services.AddAuthentication()
                 .AddGitHub(options =>
                 {
-                    options.ClientId = "baa3af166221b953f668";
-                    options.ClientSecret = "29130b738cc0cbb1be0b42bb849e42c3c92181c8";
+                    options.ClientId = "046c55c873ab73500326";
+                    options.ClientSecret = "5647436dd72e85025435e20629020d10af360b56";
                     options.AccessDeniedPath = "/AccessDeniedPathInfo";
                 });
             //facebook
@@ -106,6 +121,16 @@ namespace Blog
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Michelle's Dev Blog");
+                c.InjectJavascript("/swagger/swagger.js");
+                c.InjectStylesheet("/swagger/swagger.css");
+                c.DocumentTitle = "Michelle's Dev Blog";
+            });
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -126,6 +151,8 @@ namespace Blog
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+
+                endpoints.MapControllers();
             });
         }
     }

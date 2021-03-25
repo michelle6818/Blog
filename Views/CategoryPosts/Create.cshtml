@@ -56,12 +56,12 @@
 </div>
 
 
-    @section scripts{
-        <script>
-            $(document).ready(function () {
-                $("#Name, #Description, #Abstract, #Content, #Body, #ModeratedBody, #Message").summernote();
-            });
-        </script>
-    }
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#Abstract").summernote();
+        });
+    </script>
 
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
