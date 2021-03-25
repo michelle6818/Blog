@@ -53,6 +53,13 @@ namespace Blog
 
             //Register our new BasicImageService
             services.AddTransient<IImageService, BasicImageService>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("DefaultPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
 
             services.AddSwaggerGen(c =>
             {
@@ -102,13 +109,6 @@ namespace Blog
                     options.AccessDeniedPath = "/AccessDeniedPathInfo";
                 });
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("DefaultPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-            });
 
 
             //Services needed to send emails
@@ -131,6 +131,7 @@ namespace Blog
                 app.UseHsts();
             }
 
+            app.UseCors("DefaultPolicy");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -147,7 +148,6 @@ namespace Blog
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCors("DefaultPolicy");
             app.UseEndpoints(endpoints =>
             {
                 //UNCOMMENT THIS FOR SLUGS
