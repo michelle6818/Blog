@@ -19,11 +19,11 @@
                 <div class="media">
                     <img src="@imageService.DecodeFile(category.ImageData, category.ContentType)" class="mr-6 img-fluid d-none d-md-flex" alt="image">
                     <div class="media-body">
-                        <h3 class="title ml-3 mb-1">@category.Name</h3>
+                        <h3 class="title ml-3 mb-1">@Html.Raw(category.Name)</h3>
                         <div class="meta ml-3 mb-1">
                         <span>Published @category.Created.ToString("MMMM dd, yyyy")</span>
                         </div>
-                        <div class="intro ml-3 mb-1">@category.Description</div>
+                        <div class="intro ml-3 mb-1">@Html.Raw(category.Description)</div>
                         <br />
                         <div class="ml-3">
                             @if (User.IsInRole("Administrator"))
@@ -45,7 +45,7 @@
                     <div class="media">
                         <div class="media-body">
                             <h3 class="title mb-1">
-                                @category.Name
+                                @Html.Raw(category.Name)
                             </h3>
                             <span class="date meta mb-1">
                                 Published @category.Created.ToString("MMMM dd, yyyy")
@@ -53,7 +53,7 @@
                             @*<span class="date">Updated @category.Updated.ToString("MMM dd, yyyy")</span>*@
                             @*<span class="time">5 min read</span><span class="comment"><a href="#">8 comments</a></span></div>*@
                             <div class="intro">
-                                @category.Description
+                                @Html.Raw(category.Description)
                             </div>
                             <br />
                             <div>

@@ -24,7 +24,7 @@
                     <div class="media justify-content-center">
                         <img src="@imageService.DecodeFile(categoryPost.ImageData, categoryPost.ContentType)" class="mr-3 img-fluid d-none d-md-flex" alt="image">
                         <div class="media-body">
-                            <h3 class="title ml-3 mb-1">@categoryPost.Title</h3>
+                            <h3 class="title ml-3 mb-1">@Html.Raw(categoryPost.Title)</h3>
                             <div class="meta ml-3 mb-1">
                                 <span>Published @categoryPost.Created.ToString("MMMM dd, yyyy")</span>
                             </div>
@@ -42,7 +42,7 @@
                 <div class="item mb-5">
                     <div class="media">
                         <div class="media-body">
-                            <h3 class="title ml-3 mb-1">@categoryPost.Title</h3>
+                            <h3 class="title ml-3 mb-1">@Html.Raw(categoryPost.Title)</h3>
                             <div class="meta ml-3 mb-1">
                                 <span>Published @categoryPost.Created.ToString("MMMM dd, yyyy")</span>
                             </div>
