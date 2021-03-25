@@ -102,6 +102,15 @@ namespace Blog
                     options.AccessDeniedPath = "/AccessDeniedPathInfo";
                 });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("DefaultPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
+
             //Services needed to send emails
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddScoped<IEmailSender, EmailService>();
@@ -138,7 +147,7 @@ namespace Blog
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseCors("DefaultPolicy");
             app.UseEndpoints(endpoints =>
             {
                 //UNCOMMENT THIS FOR SLUGS
