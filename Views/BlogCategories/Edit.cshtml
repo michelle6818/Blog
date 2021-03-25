@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <textarea asp-for="Name" class="form-control"></textarea>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,8 +51,14 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#Description,#Name").summernote();
+        });
+    </script>
 
 
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -8,15 +8,15 @@
 }
 
 <article class="blog-post px-3 py-5 p-md-5">
-    <div class="container text-center">
-        <header class="blog-post-header">
+    <div class="container">
+        <header class="blog-post-header text-center">
             <h2 class="title mb-2">@Model.Title</h2>
             <h6 class="subheading">@Model.Abstract</h6>
             <div class="meta mb-3"><span class="date">Published on @Model.Created.ToString("MMMM dd, yyyy")</span></div>
         </header>
 
         <div class="blog-post-body">
-            <figure class="blog-banner">
+            <figure class="blog-banner text-center">
                 <img src="@imageService.DecodeFile(Model.ImageData, Model.ContentType)" class="image-fluid">
             </figure>
             <div class="row">
@@ -105,3 +105,12 @@
         <a asp-action="Index">Back to Posts</a>
     </div>
 </article>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#Body").summernote();
+        });
+    </script>
+
+}

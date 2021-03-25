@@ -16,18 +16,25 @@
     <script defer src="~/js/all.min.js"></script>
 
     <!-- Theme CSS -->
-    <link id="theme-style" rel="stylesheet" href="~/css/theme-1.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <link id="theme-style" rel="stylesheet" href="~/css/theme-1.css">
+    <link rel="stylesheet" href="/css/site.css" />
+     @*<link href="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">*@
+    @*<link href="~/css/summernote-bs4.css" rel="stylesheet">*@
 
 </head>
 <body>
 
     <header class="header text-center">
+
+        <div class="row justify-content-center">
+
         <partial name="_LoginPartial" />
+        </div>
         <h1 class="blog-name pt-lg-4 mb-0">Michelle's Blog </h1>
 
         <nav class="navbar navbar-expand-lg navbar-dark">
@@ -130,18 +137,14 @@
             <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
         </footer>*@
 
-    @*<script src="~/js/jquery-3.4.1.min.js"></script>*@
+    <script src="~/js/jquery-3.4.1.min.js"></script>
     @*<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>*@
     <script src="~/js/popper.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     @*<script src="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>*@
-    @*<script src="~/js/summernote-bs4.js"></script>*@
+    <script src="~/js/summernote-bs4.js"></script>
 
-    @*<script>
-            $(document).ready(function () {
-                $("#Name, #Description, #Abstract, #Content, #Body, #ModeratedBody, #Message").summernote();
-            });
-        </script>*@
+   
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

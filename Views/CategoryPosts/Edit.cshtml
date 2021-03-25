@@ -10,11 +10,11 @@
 
 
 
-<h4>Edit a category post</h4>
+<h4>Edit this post</h4>
 <hr />
 <img src="@imageService.DecodeFile(Model.ImageData, Model.ContentType)" class="img-fluid" />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col">
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -67,6 +67,13 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
+    @section scripts{
+        <script>
+        $(document).ready(function () {
+            $("#Content,#Abstract,#Title").summernote();
+        });
+        </script>
+
+    }
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
