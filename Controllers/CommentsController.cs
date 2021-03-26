@@ -108,9 +108,14 @@ namespace Blog.Controllers
             {
                 try
                 {
+
                     comment.Updated = DateTime.Now;
-                    _context.Update(comment);
-                    await _context.SaveChangesAsync();
+
+                    if (comment.BlogUserId == _userManager.GetUserId(User))
+                    {
+                        _context.Update(comment);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {

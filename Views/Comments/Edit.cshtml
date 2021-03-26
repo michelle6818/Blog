@@ -1,7 +1,10 @@
 ﻿@model Blog.Models.Comment
+@inject Microsoft.AspNetCore.Identity.UserManager<BlogUser> _userManager
+
 
 @{
     ViewData["Title"] = "Edit";
+    var userId = _userManager.GetUserId(User);
 }
 
 
@@ -33,9 +36,11 @@
                 <textarea asp-for="Body" class="form-control"></textarea>
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))
+            { 
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="HasBeenModerated" /> 
+                    <input class="form-check-input" asp-for="HasBeenModerated" />
                     <br />
                     @Html.DisplayNameFor(model => model.HasBeenModerated)
                 </label>
@@ -56,6 +61,7 @@
                 <textarea asp-for="ModeratedBody" class="form-control"></textarea>
                 <span asp-validation-for="ModeratedBody" class="text-danger"></span>
             </div>
+    }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -76,5 +82,5 @@
     </script>
 
 
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
