@@ -97,7 +97,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CategoryPostId,BlogUserId,Body,Created,Moderated,HasBeenModerated,ModeratedReason,ModeratedBody")] Comment comment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CategoryPostId,BlogUserId,Body,Created,Moderated,HasBeenModerated,ModeratedReason,ModeratedBody")] Comment comment, string slug)
         {
             if (id != comment.Id)
             {
@@ -128,7 +128,7 @@ namespace Blog.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "CategoryPosts");
             }
             ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", comment.BlogUserId);
             ViewData["CategoryPostId"] = new SelectList(_context.CategoryPost, "Id", "Id", comment.CategoryPostId);
