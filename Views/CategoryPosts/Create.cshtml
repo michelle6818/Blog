@@ -27,13 +27,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Abstract" class="control-label"></label>
-                @*<input asp-for="Abstract" class="form-control" />*@
                 <textarea asp-for="Abstract" name="Abstract" id="Abstract" class="form-control"></textarea>
                 <span asp-validation-for="Abstract" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                @*<input asp-for="Content" class="form-control" />*@
                 <textarea asp-for="Content" name="Content" id="Content" class="form-control"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
@@ -56,12 +54,12 @@
 </div>
 
 
-@section scripts{
     <script>
         $(document).ready(function () {
             $("#Content,#Abstract,#Title").summernote();
         });
     </script>
+@section scripts{
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

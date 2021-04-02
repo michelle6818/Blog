@@ -13,17 +13,17 @@
     <div class="container">
         <header class="blog-post-header text-center">
             <h2 class="title mb-2">@Html.Raw(Model.Title)</h2>
-            <h6 class="subheading">@Html.Raw(Model.Abstract)</h6>
             <div class="meta mb-3"><span class="date">Published on @Model.Created.ToString("MMMM dd, yyyy")</span></div>
+            <h6 class="subheading">@Html.Raw(Model.Abstract)</h6>
         </header>
 
         <div class="blog-post-body">
             <figure class="blog-banner text-center">
-                <img src="@imageService.DecodeFile(Model.ImageData, Model.ContentType)" class="image-fluid">
+                <img src="@imageService.DecodeFile(Model.ImageData, Model.ContentType)" class="image-fluid" style="width: 400px;">
             </figure>
             <div class="row">
                 <div class="card-body mx-auto">
-                    <b>@Html.Raw(Model.Content)</b>
+                    <p>@Html.Raw(Model.Content)</p>
                 </div>
             </div>
         </div>
@@ -41,8 +41,7 @@
                         @Html.Hidden("CategoryPostId", Model.Id)
 
                         <div class="form-group">
-                            <label class="control-label">Comment</label>
-                            @*<input asp-for="Body" class="form-control" />*@
+                            <label class="control-label text-success" >Comment</label>
                             <textarea required name="Body" class="form-control"></textarea>
                         </div>
                         <div class="form-group">
@@ -58,58 +57,66 @@
         <h5 class="text-center">Please <a asp-area="Identity" asp-page="/Account/Login">LOG IN </a>to add your comment!</h5>
     }
     <br /><br />
-    @foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
-    {
-        <div class="row text-center">
-            <div class="col">
-                @comment.BlogUser.FullName
-            </div>
-            <div class="col">
-                @comment.Created.ToString("MMMM dd, yyyy")
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                @foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
+                {
+                    <div class="row">
+                        <div class="col-md-9">
+                            <p>
+                                <strong class="text-success">@comment.BlogUser.FullName</strong>
+                            </p>
+                            @if (comment.HasBeenModerated)
+                            {
+                                <div class="clearfix"></div>
+                                <p class="text-success">
+                                    @comment.ModeratedBody
+                                </p>
+                            }
+                            else
+                            {
+                                <div class="clearfix"></div>
+                                <p class="text-success">
+                                    @comment.Body
+                                </p>
+                            }
+                        </div>
+                        <div class="col-md-3">
+                            <p class="text-success text-center">
+                                @comment.Created.ToString("MMM dd, yyyy")
+                            </p>
+                        </div>
+                    </div>
+                    @if (userId == comment.BlogUserId)
+                    {
+                        <p class="text-center">
+                        <a asp-controller="Comments" asp-action="Edit" asp-route-id="@comment.Id">Edit Your Comment</a>
+                            </p>
+                    }
+                    <hr class="text-success-muted" />
+
+                }
             </div>
         </div>
-        @if (comment.HasBeenModerated)
-        {
-            <div class="row text-center">
-                <div class="col">
-                    @Html.Raw(comment.ModeratedBody)
-                </div>
-            </div>
-        }
-        else
-        {
-            <div class="row text-center">
-                <div class="col">
-                    @Html.Raw(comment.Body)
-                </div>
-            </div>
-        }
-    }
+    </div>
     <br />
     <div class="text-center">
-       
-            @if (User.IsInRole("Administrator"))
-            {
-                <a asp-action="Edit" asp-route-id="@Model.Id">Edit Post|</a>
-            }
-        
+
         @if (User.IsInRole("Administrator"))
         {
+            <a asp-action="Edit" asp-route-id="@Model.Id">Edit Post|</a>
+              
             <a asp-action="Delete" asp-route-id="@Model.Id">Delete Post|</a>
         }
-        @foreach (var comment in Model.Comments)
+        
+        @if (User.IsInRole("Moderator") || User.IsInRole("Administrator"))
         {
-            @if  (userId == comment.BlogUserId)
-            {
-                <a asp-controller="Comments" asp-action="Edit" asp-route-id="@comment.Id">Edit Your Comment</a>
-            }
-        }
-            @if (User.IsInRole("Moderator") || User.IsInRole("Administrator"))
-            {
-                <a asp-controller="Comments" asp-action="Index" asp-route-id="@Model.Id">Moderate Comment</a>
-            } |
-            <a asp-action="Index">Back to Posts</a>
-        </div>
+            <a asp-controller="Comments" asp-action="Index" asp-route-id="@Model.Id">Moderate Comment</a>
+            <p>|</p>
+        } 
+        <a asp-action="Index">Back to Posts</a>
+    </div>
 </article>
 
 @section scripts{

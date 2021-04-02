@@ -115,6 +115,9 @@ namespace Blog.Controllers
                     {
                         _context.Update(comment);
                         await _context.SaveChangesAsync();
+                        //return RedirectToAction("Details", "CategoryPosts", new { slug });
+                        return RedirectToAction("Index", "CategoryPosts");
+
                     }
                 }
                 catch (DbUpdateConcurrencyException)
@@ -128,6 +131,7 @@ namespace Blog.Controllers
                         throw;
                     }
                 }
+                //return RedirectToAction("Details", "CategoryPosts", new { slug });
                 return RedirectToAction("Index", "CategoryPosts");
             }
             ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", comment.BlogUserId);
