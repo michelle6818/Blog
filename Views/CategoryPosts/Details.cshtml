@@ -9,16 +9,17 @@
     var userId = _userManager.GetUserId(User);
 }
 
-<article class="blog-post px-3 py-5 p-md-5">
+<div class="main-wrapper" style="background-color:transparent">
+<article class="blog-post px-3 py-5">
     <div class="container">
-        <header class="blog-post-header text-center">
+        <header class="blog-post-header">
             <h2 class="title mb-2">@Html.Raw(Model.Title)</h2>
             <div class="meta mb-3"><span class="date">Published on @Model.Created.ToString("MMMM dd, yyyy")</span></div>
             <h6 class="subheading">@Html.Raw(Model.Abstract)</h6>
         </header>
-
+    <br />
         <div class="blog-post-body">
-            <figure class="blog-banner text-center">
+            <figure class="blog-banner">
                 <img src="@imageService.DecodeFile(Model.ImageData, Model.ContentType)" class="image-fluid" style="width: 400px;">
             </figure>
             <div class="row">
@@ -112,12 +113,12 @@
         
         @if (User.IsInRole("Moderator") || User.IsInRole("Administrator"))
         {
-            <a asp-controller="Comments" asp-action="Index" asp-route-id="@Model.Id">Moderate Comment</a>
-            <p>|</p>
+            <a asp-controller="Comments" asp-action="Index" asp-route-id="@Model.Id">Moderate Comment</a><p></p>
         } 
         <a asp-action="Index">Back to Posts</a>
     </div>
 </article>
+    </div>
 
 @section scripts{
     <script>
